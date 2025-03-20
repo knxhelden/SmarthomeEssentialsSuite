@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ProjectView_DeleteButton.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="ProjectView_NewButton_EtsImport.Text" xml:space="preserve">
+    <value>KNX Projekt importieren</value>
+  </data>
+  <data name="ProjectView_NewButton.Text" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="ProjectView_NewButton_OpenhabImport.Text" xml:space="preserve">
+    <value>openHAB Projekt importieren</value>
+  </data>
+  <data name="ProjectView_OpenButton.Content" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="AppNavigation_Projects.Content" xml:space="preserve">
+    <value>Projekte</value>
+  </data>
+  <data name="AppNavigation_Structure.Content" xml:space="preserve">
+    <value>Struktur</value>
+  </data>
+  <data name="AppNavigation_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ProjectView_AddProjectDialog.Title" xml:space="preserve">
+    <value>Neues Projekt</value>
+  </data>
+  <data name="ProjectView_AddProjectDialog_Name.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProjectView_AddProjectDialog_Number.Header" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="ProjectView_AddProjectDialog.CloseButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ProjectView_AddProjectDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Anlegen</value>
+  </data>
+  <data name="ProjectView_Project_Name.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProjectView_Project_Number.Header" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="ProjectView_Project_FirstName.Header" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="ProjectView_Project_LastName.Header" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="ProjectView_Project_Phone.Header" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="ProjectView_Project_Email.Header" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="ProjectView_Project_BuildingOwner.Text" xml:space="preserve">
+    <value>Bauherrschaft</value>
+  </data>
+  <data name="ProjectView_Project_Details.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ProjectView_Project_ConstructionSite.Text" xml:space="preserve">
+    <value>Baustelle</value>
+  </data>
+  <data name="ProjectView_Project_Street.Header" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="ProjectView_Project_Zip.Header" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="ProjectView_Project_City.Header" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="ProjectView_DeleteButton_ConfirmMessage.Text" xml:space="preserve">
+    <value>Das Projekt wird dauerhaft gelöscht. Möchten Sie fortfahren?</value>
+  </data>
+  <data name="ProjectView_DeleteButton_ConfirmButton.Content" xml:space="preserve">
+    <value>Ja, Projekt dauerhaft löschen</value>
+  </data>
+  <data name="MainView_AppBar_Success" xml:space="preserve">
+    <value>Erfolgreich</value>
+  </data>
+  <data name="MainView_AppBar_Info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="MainView_AppBar_Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="MainView_AppBar_Warning" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="ProjectView_AppBar_ProjectDeleted" xml:space="preserve">
+    <value>Das Projekt wurde erfolgreich gelöscht.</value>
+  </data>
+  <data name="ProjectView_AppBar_ProjectAdded" xml:space="preserve">
+    <value>Das Projekt wurde erfolgreich angelegt.</value>
+  </data>
+  <data name="ProjectView_KnxImport_FilePicker_ImportButtonText" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog.CloseButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog.Title" xml:space="preserve">
+    <value>KNX Projekt importieren</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_PasswordProtection.Text" xml:space="preserve">
+    <value>Das Projekt ist passwortgeschützt. Bitte geben Sie das Passwort ein, welches in der ETS vergeben wurde.</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_Password.Header" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_ImportFilter.Text" xml:space="preserve">
+    <value>Welche Daten sollen importiert werden:</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_MasterData.Content" xml:space="preserve">
+    <value>Stammdaten des Projekts</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_Structure.Content" xml:space="preserve">
+    <value>Gebäudestruktur</value>
+  </data>
+  <data name="ProjectView_KnxImportDialog_Devices.Content" xml:space="preserve">
+    <value>Geräte</value>
+  </data>
+  <data name="StructureView_DevicesTab.Header" xml:space="preserve">
+    <value>Geräte</value>
+  </data>
+  <data name="StructureView_ProjectItemMetadata_Name.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StructureView_ProjectItemMetadata_Description.Header" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="StructureView_ProjectItemMetadata_CreationDate.Text" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="StructureView_ProjectItemMetadata_ModificationDate.Text" xml:space="preserve">
+    <value>Geändert am</value>
+  </data>
+  <data name="StructureView_ProjectItemDevices_List_Type.Text" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="StructureView_ProjectItemDevices_List_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StructureView_ProjectItemDevices_List_Location.Text" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="StructureView_CabinetTab.Header" xml:space="preserve">
+    <value>Schaltschrank</value>
+  </data>
+  <data name="StructureView_DetailsTab.Header" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="StructureView_ProjectItemDevices_List_Bus.Text" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddButton.Label" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="StructureView_ProjectTree_DeleteButton.Label" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog.CloseButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog.Title" xml:space="preserve">
+    <value>Neues Element hinzufügen</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog_Type.Header" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog_Name.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StructureView_ProjectTree_AddDialog_Type.PlaceholderText" xml:space="preserve">
+    <value>Wählen Sie einen Typ</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_Identifier" xml:space="preserve">
+    <value>Kennzeichen</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_DeviceType" xml:space="preserve">
+    <value>Gerätetyp</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_BusType" xml:space="preserve">
+    <value>Bustyp</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_Manufacturer" xml:space="preserve">
+    <value>Hersteller</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_OrderNumber" xml:space="preserve">
+    <value>Bestellnummer</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_PhysicalKnxAddress" xml:space="preserve">
+    <value>Physikalische Adresse</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_RailMount" xml:space="preserve">
+    <value>Hutschienenmontage</value>
+  </data>
+  <data name="StructureView_ProjectItemDetails_DivisionUnits" xml:space="preserve">
+    <value>Teilungseinheiten</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Smarthome Essentials Suite</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Die Smarthome Essentials Suite ist eine Anwendung, die die Arbeit eines Smarthome-Integrators oder Elektrikers vereinfachen soll. Sie unterstützt die Planung, Umsetzung und Dokumentation von Smart Home-Projekten und unterstützt eine Vielzahl von Systemen, die in der Gebäudeautomation eingesetzt werden.</value>
+  </data>
+  <data name="AppCopyright" xml:space="preserve">
+    <value>© 2025 KNX Helden - Timm Bremus. Alle Rechte vorbehalten.</value>
+  </data>
+</root>

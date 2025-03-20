@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "KnxHelden.SHES.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "KnxHelden.SHES.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
