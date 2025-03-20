@@ -83,14 +83,8 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Ellipse x:Name="Ellipse"
-                                     Grid.RowSpan="2"
-                                     Width ="32"
-                                     Height="32"
-                                     Margin="6"
-                                     VerticalAlignment="Center"
-                                     HorizontalAlignment="Center"
-                                     Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+
+                            <FontIcon Grid.RowSpan="2" FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF07D2;" Foreground="DimGray" FontSize="30" />
                             <TextBlock Grid.Column="1"
                                        Text="{x:Bind Name}"
                                        Style="{ThemeResource BaseTextBlockStyle}"
