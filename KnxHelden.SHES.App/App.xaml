@@ -3,7 +3,8 @@
     x:Class="KnxHelden.SHES.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:KnxHelden.SHES.App">
+    xmlns:local="using:KnxHelden.SHES.App"
+    xmlns:converters="using:KnxHelden.SHES.Controls.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,6 +13,8 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
 
+            <converters:EnumDisplayNameConverter x:Key="EnumDisplayNameConverter" />
+            
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <FontFamily x:Key="MaterialDesignIcons">/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons</FontFamily>

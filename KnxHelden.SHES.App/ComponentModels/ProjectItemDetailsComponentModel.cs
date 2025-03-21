@@ -19,6 +19,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Services.Devices;
+using KnxHelden.SHES.Controls.Converters;
+using Microsoft.UI.Xaml.Markup;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -104,27 +106,27 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         private ComboBox GetEnumComboBox<T>(object source, string propertyName) where T : struct, Enum
         {
+            
+
             var comboBox = new ComboBox
             {
-                ItemsSource = Enum.GetValues(typeof(T)).Cast<T>().Select(e => new
-                {
-                    Value = e,
-                    DisplayName = e.GetType()
-                                  .GetField(e.ToString())
-                                  ?.GetCustomAttributes(typeof(DisplayAttribute), false)
-                                  .Cast<DisplayAttribute>()
-                                  .FirstOrDefault()?.Name ?? e.ToString()
-                }).ToList(),
-                DisplayMemberPath = "DisplayName",
-                SelectedValuePath = "Value"
+                ItemsSource = Enum.GetValues(typeof(T)).Cast<T>().ToList()
             };
 
-            // Binding für SelectedItem
+            string xamlTemplate =
+                "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>" +
+                    "<TextBlock Text='{Binding Converter={StaticResource EnumDisplayNameConverter}}'/>" +
+                "</DataTemplate>";
+
+            comboBox.ItemTemplate = (DataTemplate)XamlReader.Load(xamlTemplate);
+
+            // Binding for SelectedItem
             comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding
             {
                 Source = source,
                 Path = new PropertyPath(propertyName),
-                Mode = BindingMode.TwoWay
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
 
             return comboBox;
