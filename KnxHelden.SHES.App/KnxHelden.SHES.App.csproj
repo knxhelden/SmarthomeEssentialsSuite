@@ -20,6 +20,8 @@
     <None Remove="Components\ProjectItemDevicesComponent.xaml" />
     <None Remove="Components\ProjectItemMetadataComponent.xaml" />
     <None Remove="Resources\ControlDataTemplates.xaml" />
+    <None Remove="Views\CompanyView.xaml" />
+    <None Remove="Views\ManufacturerView.xaml" />
     <None Remove="Views\MasterDataView.xaml" />
   </ItemGroup>
 
@@ -146,6 +148,16 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Remove="Strings\en-us\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\CompanyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ManufacturerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\MasterDataView.xaml">

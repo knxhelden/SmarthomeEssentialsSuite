@@ -9,7 +9,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel>
+        <SelectorBar x:Name="MasterDataNavigation" SelectionChanged="MasterDataNavigation_SelectionChanged">
+            <SelectorBarItem x:Name="SelectorBarItemPage1" Text="Firma" IsSelected="True" />
+            <SelectorBarItem x:Name="SelectorBarItemPage2" Text="Hersteller" />
+        </SelectorBar>
 
-    </Grid>
+        <Frame x:Name="ContentFrame" IsNavigationStackEnabled="False" />
+    </StackPanel>
 </Page>
