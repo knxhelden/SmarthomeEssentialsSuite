@@ -351,4 +351,10 @@
   <data name="ManufacturerView_Manufacturer_Name.Header" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="ManufacturerView_Manufacturer_CreationDate.Text" xml:space="preserve">
+    <value>Creation</value>
+  </data>
+  <data name="ManufacturerView_Manufacturer_ModificationDate.Text" xml:space="preserve">
+    <value>Last Modification</value>
+  </data>
 </root>
