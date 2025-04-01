@@ -6,10 +6,39 @@
     xmlns:local="using:KnxHelden.SHES.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:observables="using:KnxHelden.SHES.Models.Observables"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="{x:Bind ViewModel.Page_Loaded}">
 
     <Grid>
-        <TextBlock>Hersteller</TextBlock>
+        <ListView ItemsSource="{x:Bind ViewModel.Manufacturers, Mode=TwoWay}">
+            <ListView.Header>
+                <Grid Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" Padding="16,5,12,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Uid="ManufacturerView_List_Name" Grid.Column="2" />
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="observables:ObservableManufacturer">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="1" Text="{x:Bind Name}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

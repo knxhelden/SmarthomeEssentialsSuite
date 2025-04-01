@@ -5,10 +5,12 @@ using KnxHelden.SHES.App.ViewModels;
 using KnxHelden.SHES.Controls.FormFieldService;
 using KnxHelden.SHES.Data;
 using KnxHelden.SHES.Data.Repositories.Devices;
+using KnxHelden.SHES.Data.Repositories.Manufacturers;
 using KnxHelden.SHES.Data.Repositories.ProjectItems;
 using KnxHelden.SHES.Data.Repositories.Projects;
 using KnxHelden.SHES.Services.Devices;
 using KnxHelden.SHES.Services.Knx;
+using KnxHelden.SHES.Services.Manufacturers;
 using KnxHelden.SHES.Services.ProjectItems;
 using KnxHelden.SHES.Services.Projects;
 using KnxHelden.SHES.Services.Settings;
@@ -81,11 +83,13 @@ namespace KnxHelden.SHES.App
             });
 
             // Repositories
+            services.AddSingleton<IManufacturerRepository, ManufacturerRepository>();
             services.AddSingleton<IProjectRepository, ProjectRepository>();
             services.AddSingleton<IProjectItemRepository, ProjectItemRepository>();
             services.AddSingleton<IDeviceRepository, DeviceRepository>();
 
             // Services
+            services.AddSingleton<IManufacturerService, ManufacturerService>();
             services.AddSingleton<IProjectService, ProjectService>();
             services.AddSingleton<IProjectItemService, ProjectItemService>();
             services.AddSingleton<IDeviceService, DeviceService>();

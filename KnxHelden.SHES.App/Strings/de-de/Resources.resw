@@ -342,4 +342,7 @@
   <data name="AppNavigation_MasterData.Content" xml:space="preserve">
     <value>Stammdaten</value>
   </data>
+  <data name="ManufacturerView_List_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

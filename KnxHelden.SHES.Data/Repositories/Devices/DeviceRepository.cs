@@ -1,11 +1,11 @@
 ﻿using KnxHelden.SHES.Models.Entities;
+using KnxHelden.SHES.Models.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KnxHelden.SHES.Models.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace KnxHelden.SHES.Data.Repositories.Devices
 {
