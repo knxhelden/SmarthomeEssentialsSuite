@@ -52,7 +52,7 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         public async void InputField_LosingFocus(object sender, object e)
         {
-            await this._projectItemService.UpdateAsync(this._currentProjectItem);
+            await this._projectItemService.UpdateAsync(CurrentProjectItem);
         }
 
         #endregion

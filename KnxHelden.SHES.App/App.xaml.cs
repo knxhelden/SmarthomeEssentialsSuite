@@ -32,6 +32,7 @@ using KnxHelden.SHES.Data.Repositories.Devices;
 using CommunityToolkit.WinUI;
 using KnxHelden.SHES.App.Services.ThemeService;
 using KnxHelden.SHES.Services.Settings;
+using KnxHelden.SHES.Controls.FormFieldService;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -121,6 +122,7 @@ namespace KnxHelden.SHES.App
             services.AddSingleton<ResourceLoader>();
             services.AddSingleton<ISettingService, SettingServicePackaged>();
             services.AddSingleton<IThemeService, ThemeService>();
+            services.AddSingleton<IFormFieldService, FormFieldService>();
 
             return services.BuildServiceProvider();
         }

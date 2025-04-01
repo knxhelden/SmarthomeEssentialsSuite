@@ -21,6 +21,8 @@ using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Services.Devices;
 using KnxHelden.SHES.Controls.Converters;
 using Microsoft.UI.Xaml.Markup;
+using Microsoft.Windows.Management.Deployment;
+using KnxHelden.SHES.Controls.FormFieldService;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -28,6 +30,7 @@ namespace KnxHelden.SHES.App.ComponentModels
     {
         private readonly ResourceLoader _resourceLoader;
         private readonly IDeviceService _deviceService;
+        private readonly IFormFieldService _formFieldService;
 
         #region --- Properties ---
 
@@ -52,10 +55,11 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #region --- Constructor ---
 
-        public ProjectItemDetailsComponentModel(ResourceLoader resourceLoader, IDeviceService deviceService)
+        public ProjectItemDetailsComponentModel(ResourceLoader resourceLoader, IDeviceService deviceService, IFormFieldService formFieldService)
         {
             _resourceLoader = resourceLoader;
             _deviceService = deviceService;
+            _formFieldService = formFieldService;
 
             // Messages
             //WeakReferenceMessenger.Default.Register<ProjectItemDetailsComponentModel, CurrentProjectItemSenderMessage>(this, (r, m) => r.CurrentDevice = m.Value);
@@ -70,6 +74,15 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #endregion
 
+        #region --- Events ---
+
+        public async void FormField_SaveChanges(object sender, object e)
+        {
+            await this._deviceService.UpdateAsync(this.CurrentDevice);
+        }
+
+        #endregion
+
         #region --- Methods ---
 
         private void LoadFormFields()
@@ -78,58 +91,28 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             // General device fields
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"),
-        GetBoundTextBox(CurrentDevice, nameof(CurrentDevice.Identifier))));
+    _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier), FormField_SaveChanges)));
 
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"), new TextBox()));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DeviceType"), GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type))));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_BusType"), GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType))));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"), new TextBox()));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_OrderNumber"), new TextBox()));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_PhysicalKnxAddress"), new TextBox()));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_RailMount"), new TextBox()));
-            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DivisionUnits"), new ComboBox()));
-        }
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DeviceType"),
+                _formFieldService.GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type), FormField_SaveChanges)));
 
-        private TextBox GetBoundTextBox(object source, string propertyName)
-        {
-            var textBox = new TextBox();
-            textBox.SetBinding(TextBox.TextProperty, new Binding
-            {
-                Source = source,
-                Path = new PropertyPath(propertyName),
-                Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            });
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_BusType"),
+                _formFieldService.GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType), FormField_SaveChanges)));
 
-            return textBox;
-        }
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Manufacturer), FormField_SaveChanges)));
 
-        private ComboBox GetEnumComboBox<T>(object source, string propertyName) where T : struct, Enum
-        {
-            
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_OrderNumber"),
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber), FormField_SaveChanges)));
 
-            var comboBox = new ComboBox
-            {
-                ItemsSource = Enum.GetValues(typeof(T)).Cast<T>().ToList()
-            };
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_PhysicalKnxAddress"),
+                new TextBox())); // Kein Event nötig
 
-            string xamlTemplate =
-                "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>" +
-                    "<TextBlock Text='{Binding Converter={StaticResource EnumDisplayNameConverter}}'/>" +
-                "</DataTemplate>";
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_RailMount"),
+                _formFieldService.GetCheckBox(CurrentDevice, nameof(CurrentDevice.IsRailMounted), FormField_SaveChanges)));
 
-            comboBox.ItemTemplate = (DataTemplate)XamlReader.Load(xamlTemplate);
-
-            // Binding for SelectedItem
-            comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding
-            {
-                Source = source,
-                Path = new PropertyPath(propertyName),
-                Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            });
-
-            return comboBox;
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DivisionUnits"),
+                new ComboBox())); // Kein Event nötig
         }
 
         #endregion
