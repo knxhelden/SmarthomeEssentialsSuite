@@ -96,6 +96,8 @@ namespace KnxHelden.SHES.App
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<ProjectsViewModel>();
             services.AddTransient<MasterDataViewModel>();
+            services.AddTransient<CompanyViewModel>();
+            services.AddTransient<ManufacturerViewModel>();
             services.AddTransient<StructureViewModel>();
             services.AddTransient<ProjectTreeComponentModel>();
             services.AddTransient<ProjectItemDevicesComponentModel>();

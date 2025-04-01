@@ -1,3 +1,5 @@
+using KnxHelden.SHES.App.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,9 +25,12 @@ namespace KnxHelden.SHES.App.Views
     /// </summary>
     public sealed partial class ManufacturerView : Page
     {
+        public ManufacturerViewModel ViewModel { get; }
+
         public ManufacturerView()
         {
             this.InitializeComponent();
+            ViewModel = App.Services.GetService<ManufacturerViewModel>();
         }
     }
 }
