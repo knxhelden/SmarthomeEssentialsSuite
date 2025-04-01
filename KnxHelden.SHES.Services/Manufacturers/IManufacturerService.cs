@@ -10,6 +10,8 @@ namespace KnxHelden.SHES.Services.Manufacturers
 {
     public interface IManufacturerService : IService
     {
-        Task<List<ObservableManufacturer>> GetManufacturersAsync();
+        Task<List<ObservableManufacturer>> GetAllAsync();
+
+        Task UpdateAsync(ObservableManufacturer observableManufacturer);
     }
 }

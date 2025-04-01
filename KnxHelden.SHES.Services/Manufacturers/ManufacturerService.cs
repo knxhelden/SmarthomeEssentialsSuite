@@ -1,4 +1,5 @@
 ﻿using KnxHelden.SHES.Data.Repositories.Manufacturers;
+using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using KnxHelden.SHES.Services.Devices;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,7 @@ namespace KnxHelden.SHES.Services.Manufacturers
 
         #endregion
 
-        public async Task<List<ObservableManufacturer>> GetManufacturersAsync()
+        public async Task<List<ObservableManufacturer>> GetAllAsync()
         {
             try
             {
@@ -39,6 +40,11 @@ namespace KnxHelden.SHES.Services.Manufacturers
             {
                 return null;
             }
+        }
+
+        public async Task UpdateAsync(ObservableManufacturer observableManufacturer)
+        {
+            await this._manufacturerRepository.UpdateAsync(observableManufacturer.entity as Manufacturer);
         }
     }
 }

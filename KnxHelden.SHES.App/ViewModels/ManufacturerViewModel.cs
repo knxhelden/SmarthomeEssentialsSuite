@@ -14,6 +14,19 @@ namespace KnxHelden.SHES.App.ViewModels
 
         public ObservableCollection<ObservableManufacturer> Manufacturers { get; set; } = [];
 
+        private ObservableManufacturer selectedManufacturer;
+        public ObservableManufacturer SelectedManufacturer
+        {
+            get => selectedManufacturer;
+            set
+            {
+                SetProperty(ref selectedManufacturer, value);
+                OnPropertyChanged(nameof(IsManufacturerSelected));
+            }
+        }
+
+        public bool IsManufacturerSelected => selectedManufacturer != null;
+
         #region --- Constructor ---
 
         public ManufacturerViewModel(IManufacturerService manufacturerService)
@@ -30,13 +43,18 @@ namespace KnxHelden.SHES.App.ViewModels
             await LoadManufacturersAsync();
         }
 
+        public async void InputField_LostFocus(object sender, object e)
+        {
+            await _manufacturerService.UpdateAsync(SelectedManufacturer);
+        }
+
         #endregion
 
         #region --- Methods ---
 
         private async Task LoadManufacturersAsync()
         {
-            var manufacturers = await this._manufacturerService.GetManufacturersAsync();
+            var manufacturers = await this._manufacturerService.GetAllAsync();
             Manufacturers.AddRange(manufacturers);
 
             this.OnPropertyChanged(nameof(Manufacturers));
