@@ -16,12 +16,6 @@ namespace KnxHelden.SHES.Models.Observables
             set => SetProperty(((Device)entity).Identifier, value, (Device)entity, (u, n) => u.Identifier = n);
         }
 
-        public int Manufacturer
-        {
-            get => ((Device)entity).Manufacturer;
-            set => SetProperty(((Device)entity).Manufacturer, value, (Device)entity, (u, n) => u.Manufacturer = n);
-        }
-
         public string OrderNumber
         {
             get => ((Device)entity).OrderNumber;
@@ -97,6 +91,18 @@ namespace KnxHelden.SHES.Models.Observables
         public List<DeviceType> DeviceTypes
         {
             get => Enum.GetValues(typeof(DeviceType)).Cast<DeviceType>().ToList();
+        }
+
+        public ObservableManufacturer Manufacturer
+        {
+            get => new ObservableManufacturer(((Device)entity).Manufacturer ?? null);
+            set
+            {
+                if (value != null)
+                {
+                    SetProperty(((Device)entity).Manufacturer, value.entity, (Device)entity, (d, v) => d.Manufacturer = v);
+                }
+            }
         }
 
         #region --- Constructors ---

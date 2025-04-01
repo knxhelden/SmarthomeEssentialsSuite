@@ -12,7 +12,6 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250228001" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Enumerations\" />
   </ItemGroup>
   <ItemGroup>

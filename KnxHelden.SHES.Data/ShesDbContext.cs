@@ -1,13 +1,23 @@
-﻿using KnxHelden.SHES.Models.Entities;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using KnxHelden.SHES.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection.Emit;
+using Windows.Devices.Usb;
 
 namespace KnxHelden.SHES.Data
 {
     public class ShesDbContext : DbContext
     {
         public DbSet<Project> Projects { get; set; }
+
+        public DbSet<Manufacturer> Manufacturers { get; set; }
 
         public DbSet<Building> Buildings { get; set; }
 
@@ -108,15 +118,21 @@ namespace KnxHelden.SHES.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Project>().ToTable("Projects")
-                .HasMany(p => p.Buildings)
-                .WithOne(p => p.Project)
-                .HasForeignKey(b => b.ProjectId)
+                .HasMany(project => project.Buildings)
+                .WithOne(building => building.Project)
+                .HasForeignKey(building => building.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Manufacturer>().ToTable("Manufacturers")
+                .HasMany(manufacturer => manufacturer.Devices)
+                .WithOne(device => device.Manufacturer)
+                .HasForeignKey(device => device.ManufacturerId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
             modelBuilder.Entity<ProjectItem>().ToTable("ProjectItems")
-                .HasMany(i => i.Children)
-                .WithOne(i => i.Parent)
-                .HasForeignKey(i => i.ParentId)
+                .HasMany(projectItem => projectItem.Children)
+                .WithOne(projectItem => projectItem.Parent)
+                .HasForeignKey(projectItem => projectItem.ParentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Building>().ToTable("Buildings");
@@ -147,7 +163,33 @@ namespace KnxHelden.SHES.Data
 
             modelBuilder.Entity<SwitchingActuator>().ToTable("SwitchingActuators");
 
+            // Add seed data
+            SeedManufacturers(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
+        }
+
+        /// <summary>
+        /// Prefilled manufacturer table with data
+        /// </summary>
+        /// <param name="modelBuilder">The model builder.</param>
+        private void SeedManufacturers(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Manufacturer>().HasData(
+                new Manufacturer()
+                {
+                    Id = new Guid("9a644771-78cf-4088-aa18-29575d0d643c"),
+                    CreationTime = new DateTime(638712000000000000),
+                    LastModificationTime = new DateTime(638712000000000000),
+                    Name = "MDT"
+                },
+                new Manufacturer()
+                {
+                    Id = new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"),
+                    CreationTime = new DateTime(638712000000000000),
+                    LastModificationTime = new DateTime(638712000000000000),
+                    Name = "Siemens"
+                });
         }
     }
 }

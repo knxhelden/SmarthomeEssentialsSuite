@@ -1,5 +1,6 @@
 ﻿using KnxHelden.SHES.Models.Attributes;
 using KnxHelden.SHES.Models.Enumerations;
+using System;
 
 namespace KnxHelden.SHES.Models.Entities
 {
@@ -7,8 +8,6 @@ namespace KnxHelden.SHES.Models.Entities
     public class Device : ProjectItem
     {
         public string Identifier { get; set; }
-
-        public int Manufacturer { get; set; }
 
         public string OrderNumber { get; set; }
 
@@ -25,5 +24,9 @@ namespace KnxHelden.SHES.Models.Entities
         public bool IsRailMounted { get; set; }
 
         public float DivisionUnits { get; set; }
+
+        public Guid? ManufacturerId { get; set; }
+
+        public Manufacturer Manufacturer { get; set; }
     }
 }

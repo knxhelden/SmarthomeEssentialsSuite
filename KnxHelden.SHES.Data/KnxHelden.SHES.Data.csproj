@@ -7,6 +7,7 @@
     <UseWinUI>true</UseWinUI>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="8.6.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
@@ -14,6 +15,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KnxHelden.SHES.Models\KnxHelden.SHES.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   
 </Project>

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace KnxHelden.SHES.Data.Migrations
 {
     /// <inheritdoc />
@@ -11,6 +13,20 @@ namespace KnxHelden.SHES.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Manufacturers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "ProjectItems",
                 columns: table => new
@@ -114,7 +130,6 @@ namespace KnxHelden.SHES.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Identifier = table.Column<string>(type: "TEXT", nullable: true),
-                    Manufacturer = table.Column<int>(type: "INTEGER", nullable: false),
                     OrderNumber = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
                     BusType = table.Column<int>(type: "INTEGER", nullable: false),
@@ -122,11 +137,17 @@ namespace KnxHelden.SHES.Data.Migrations
                     KnxTopologyLine = table.Column<int>(type: "INTEGER", nullable: true),
                     KnxTopologyAddress = table.Column<int>(type: "INTEGER", nullable: true),
                     IsRailMounted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DivisionUnits = table.Column<float>(type: "REAL", nullable: false)
+                    DivisionUnits = table.Column<float>(type: "REAL", nullable: false),
+                    ManufacturerId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Devices_Manufacturers_ManufacturerId",
+                        column: x => x.ManufacturerId,
+                        principalTable: "Manufacturers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Devices_ProjectItems_Id",
                         column: x => x.Id,
@@ -323,10 +344,24 @@ namespace KnxHelden.SHES.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Id", "CreationTime", "LastModificationTime", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Siemens" },
+                    { new Guid("9a644771-78cf-4088-aa18-29575d0d643c"), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "MDT" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Buildings_ProjectId",
                 table: "Buildings",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_ManufacturerId",
+                table: "Devices",
+                column: "ManufacturerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectItems_ParentId",
@@ -381,6 +416,9 @@ namespace KnxHelden.SHES.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Devices");
+
+            migrationBuilder.DropTable(
+                name: "Manufacturers");
 
             migrationBuilder.DropTable(
                 name: "ProjectItems");
