@@ -339,4 +339,7 @@
   <data name="AppCopyright" xml:space="preserve">
     <value>© 2025 KNX Helden - Timm Bremus. Alle Rechte vorbehalten.</value>
   </data>
+  <data name="AppNavigation_MasterData.Content" xml:space="preserve">
+    <value>Stammdaten</value>
+  </data>
 </root>

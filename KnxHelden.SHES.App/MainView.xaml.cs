@@ -59,6 +59,7 @@ namespace KnxHelden.SHES.App
                 {
                     nameof(ProjectsView) => typeof(ProjectsView),
                     nameof(StructureView) => typeof(StructureView),
+                    nameof(MasterDataView) => typeof(MasterDataView),
                     _ => null
                 };
             }

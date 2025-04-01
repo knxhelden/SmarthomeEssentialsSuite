@@ -10,13 +10,13 @@ namespace KnxHelden.SHES.App.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ProjectsView : Page
+    public sealed partial class MasterDataView : Page
     {
-        public ProjectsViewModel ViewModel { get; }
+        public MasterDataViewModel ViewModel { get; }
 
-        public ProjectsView()
+        public MasterDataView()
         {
-            ViewModel = App.Services.GetService<ProjectsViewModel>();
+            ViewModel = App.Services.GetService<MasterDataViewModel>();
             this.InitializeComponent();
         }
     }

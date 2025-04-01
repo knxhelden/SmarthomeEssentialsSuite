@@ -29,6 +29,13 @@
                     <FontIcon FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF01D7;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
+            <NavigationViewItem x:Uid="AppNavigation_MasterData"
+                    Tag="MasterDataView"
+                    IsEnabled="{x:Bind ViewModel.IsCurrentProject, Mode=OneWay}">
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF13CB;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
         <Grid>
             <Grid.RowDefinitions>
