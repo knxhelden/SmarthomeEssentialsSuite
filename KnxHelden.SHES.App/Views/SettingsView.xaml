@@ -10,11 +10,22 @@
     xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style
+            x:Key="SettingsSectionHeaderTextBlockStyle"
+            BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+            TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Margin" Value="1,30,0,6" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    
     <ScrollView
             VerticalScrollBarVisibility="Auto"
             VerticalScrollMode="Auto">
         <StackPanel>
-            <TextBlock Text="Appearance and Behaviour" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <TextBlock Text="Appearance and Behaviour" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" />
             <toolkit:SettingsCard Description="Select which app theme to display" Header="App theme">
                 <toolkit:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE790;" />
@@ -37,7 +48,7 @@
                       SelectionChanged="{x:Bind ViewModel.NavigationOrientation_SelectionChanged}"/>
             </toolkit:SettingsCard>
 
-            <TextBlock Text="About" Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <TextBlock Text="About" Style="{StaticResource SettingsSectionHeaderTextBlockStyle}" />
             <toolkit:SettingsExpander
                         Margin="0,0,0,24"
                         Description="{x:Bind ViewModel.AppCopyright}"
@@ -59,7 +70,7 @@
                                     FontFamily="Consolas"
                                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                     IsTextSelectionEnabled="True"
-                                    Text="git clone https://github.com/microsoft/WinUI-Gallery" />
+                                    Text="git clone https://github.com/knxhelden/SmarthomeEssentialsSuite" />
                         <toolkit:SettingsCard.ActionIcon>
                             <FontIcon Glyph="&#xE8C8;" />
                         </toolkit:SettingsCard.ActionIcon>
@@ -77,8 +88,7 @@
                                 ContentAlignment="Vertical"
                                 Header="THIS CODE AND INFORMATION IS PROVIDED ‘AS IS’ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.">
                         <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
-                            <HyperlinkButton Content="Microsoft Services Agreement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631" />
-                            <HyperlinkButton Content="Microsoft Privacy Statement" NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839" />
+                            <HyperlinkButton Content="Microsoft Services Agreement" NavigateUri="https://www.knx-helden.de" />
                         </StackPanel>
                     </toolkit:SettingsCard>
                 </toolkit:SettingsExpander.Items>

@@ -43,7 +43,7 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <Frame Margin="36,36,0,0" x:Name="contentFrame" />
+            <Frame Margin="36,36,36,0" x:Name="ContentFrame" />
 
             <StackPanel Grid.Row="1" Margin="36,0,0,0">
                 <InfoBar IsOpen="{x:Bind ViewModel.ApplicationInfoBarOptions.IsOpen, Mode=OneWay}"

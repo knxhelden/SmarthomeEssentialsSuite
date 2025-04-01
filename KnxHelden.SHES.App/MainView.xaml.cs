@@ -27,7 +27,7 @@ namespace KnxHelden.SHES.App
             this.InitializeComponent();
 
             AppNavigation.SelectedItem = AppNavigation.MenuItems[0]; // Standardauswahl setzen
-            contentFrame.Navigate(typeof(ProjectsView)); // Erste Seite beim Start laden
+            ContentFrame.Navigate(typeof(ProjectsView)); // Erste Seite beim Start laden
         }
 
         private void AppNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -55,7 +55,7 @@ namespace KnxHelden.SHES.App
 
             if (pageType != null)
             {
-                contentFrame.Navigate(pageType);
+                ContentFrame.Navigate(pageType);
             }
         }
     }
