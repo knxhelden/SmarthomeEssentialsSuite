@@ -9,7 +9,6 @@
     xmlns:observables="using:KnxHelden.SHES.Models.Observables"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="{x:Bind ViewModel.Page_Loaded}">
 
     <Grid>
@@ -20,7 +19,8 @@
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{x:Bind ViewModel.Manufacturers, Mode=TwoWay}"
-                  SelectedItem="{x:Bind ViewModel.SelectedManufacturer, Mode=TwoWay}">
+                  SelectedItem="{x:Bind ViewModel.SelectedManufacturer, Mode=TwoWay}"
+                  Margin="16,36,16,0">
             <ListView.Header>
                 <Grid Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" Padding="16,5,12,5">
                     <Grid.ColumnDefinitions>
@@ -44,13 +44,14 @@
         </ListView>
 
         <controls:GridSplitter Grid.Column="1"
-               Background="{ThemeResource SmokeFillColorDefaultBrush}" />
+               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
 
         <ScrollViewer Grid.Column="2"
-              HorizontalScrollMode="Disabled"
-              VerticalScrollMode="Enabled"
-              VerticalScrollBarVisibility="Auto"
-              Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                      HorizontalScrollMode="Disabled"
+                      VerticalScrollMode="Enabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                      CornerRadius="0,10,10,0"
               Padding="16">
             <StackPanel>
                 <TextBlock x:Uid="ManufacturerView_Manufacturer_Details"

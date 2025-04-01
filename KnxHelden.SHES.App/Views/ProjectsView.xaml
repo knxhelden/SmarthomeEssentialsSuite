@@ -10,7 +10,6 @@
     xmlns:observables="using:KnxHelden.SHES.Models.Observables"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="{x:Bind ViewModel.OnLoaded}">
 
     <Page.Resources>
@@ -109,7 +108,7 @@
         </StackPanel>
 
         <controls:GridSplitter Grid.Column="1"
-                       Background="{ThemeResource SmokeFillColorDefaultBrush}" />
+                       Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
 
         <!-- PROJECT DETAILS -->
         <ScrollViewer Grid.Column="2"
@@ -117,6 +116,7 @@
                       VerticalScrollMode="Enabled"
                       VerticalScrollBarVisibility="Auto"
                       Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                      CornerRadius="0,10,10,0"
                       Padding="16">
             <StackPanel>
                 <TextBlock x:Uid="ProjectView_Project_Details"

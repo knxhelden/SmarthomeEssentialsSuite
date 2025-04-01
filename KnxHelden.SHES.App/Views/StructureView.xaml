@@ -9,8 +9,7 @@
     xmlns:components="using:KnxHelden.SHES.App.Components"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Page.Resources>
         <converters:BoolNegationConverter x:Key="BoolNegationConverter"/>
@@ -18,22 +17,23 @@
 
     <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="200" Width="300" />
+            <ColumnDefinition MinWidth="200" Width="200" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition MinWidth="300" Width="*" />
             <ColumnDefinition Width="10" />
-            <ColumnDefinition MinWidth="200" Width="300" />
+            <ColumnDefinition MinWidth="200" Width="200" />
         </Grid.ColumnDefinitions>
 
         <!-- PROJECT TREE -->
         <Grid Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+              CornerRadius="10,0,0,10"
               VerticalAlignment="Stretch"
               Padding="16">
             <components:ProjectTreeCompoment x:Name="ProjectTreeCompoment" VerticalAlignment="Stretch" />
         </Grid>
 
         <controls:GridSplitter Grid.Column="1"
-                               Background="{ThemeResource SmokeFillColorDefaultBrush}" />
+                               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
 
         <!-- PROJECT ITEM TABS -->
         <Grid Grid.Column="2"
@@ -77,12 +77,13 @@
         </Grid>
 
         <controls:GridSplitter Grid.Column="3"
-                               Background="{ThemeResource SmokeFillColorDefaultBrush}" />
+                               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
 
         <!-- PROJECT ITEM METADATA -->
         <Grid Grid.Column="4"
               VerticalAlignment="Stretch"
               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+              CornerRadius="0,10,10,0"
               Padding="16">
             <components:ProjectItemMetadataComponent x:Name="ProjectItemMetadataComponent" />
         </Grid>
