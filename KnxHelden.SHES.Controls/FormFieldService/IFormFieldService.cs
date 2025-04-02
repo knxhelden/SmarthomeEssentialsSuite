@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using System;
+using System.Collections.Generic;
 using Windows.Foundation;
 
 namespace KnxHelden.SHES.Controls.FormFieldService
@@ -10,6 +11,7 @@ namespace KnxHelden.SHES.Controls.FormFieldService
     {
         TextBox GetTextBox(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler);
         ComboBox GetEnumComboBox<T>(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler) where T : struct, Enum;
+        ComboBox GetComboBox<T>(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler, IEnumerable<T> itemSource, string displayMemberPath = "", string selectedValuePath = "") where T : class;
         CheckBox GetCheckBox(object source, string propertyName, RoutedEventHandler clickHandler);
     }
 }

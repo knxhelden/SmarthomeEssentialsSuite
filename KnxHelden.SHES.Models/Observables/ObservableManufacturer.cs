@@ -10,7 +10,7 @@ namespace KnxHelden.SHES.Models.Observables
         [Required]
         public string Name
         {
-            get => entity.Name;
+            get => entity?.Name;
             set => SetProperty(entity.Name, value, entity, (u, n) => u.Name = n, true);
         }
 
@@ -27,5 +27,14 @@ namespace KnxHelden.SHES.Models.Observables
         { }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ObservableManufacturer other)
+            {
+                return this.Id == other.Id;
+            }
+            return false;
+        }
     }
 }

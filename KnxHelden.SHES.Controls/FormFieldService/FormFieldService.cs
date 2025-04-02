@@ -25,7 +25,7 @@ namespace KnxHelden.SHES.Controls.FormFieldService
             });
 
             if (losingFocusHandler != null)
-                textBox.LosingFocus += losingFocusHandler; // ✅ Korrekte Signatur für LosingFocus
+                textBox.LosingFocus += losingFocusHandler;
 
             return textBox;
         }
@@ -52,7 +52,7 @@ namespace KnxHelden.SHES.Controls.FormFieldService
             });
 
             if (losingFocusHandler != null)
-                comboBox.LosingFocus += losingFocusHandler; // ✅ Korrekte Signatur für LosingFocus
+                comboBox.LosingFocus += losingFocusHandler;
 
             return comboBox;
         }
@@ -68,9 +68,30 @@ namespace KnxHelden.SHES.Controls.FormFieldService
             });
 
             if (clickHandler != null)
-                checkBox.Click += clickHandler; // ✅ Click-Event benötigt RoutedEventHandler
+                checkBox.Click += clickHandler;
 
             return checkBox;
+        }
+
+        public ComboBox GetComboBox<T>(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler, IEnumerable<T> itemSource, string displayMemberPath = "", string selectedValuePath = "") where T : class
+        {
+            var comboBox = new ComboBox
+            {
+                ItemsSource = itemSource,
+                DisplayMemberPath = displayMemberPath
+            };
+
+            comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding
+            {
+                Source = source,
+                Path = new PropertyPath(propertyName),
+                Mode = BindingMode.TwoWay
+            });
+
+            if (losingFocusHandler != null)
+                comboBox.LosingFocus += losingFocusHandler;
+
+            return comboBox;
         }
     }
 }

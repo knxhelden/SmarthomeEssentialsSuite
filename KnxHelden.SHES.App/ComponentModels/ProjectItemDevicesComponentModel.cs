@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using KnxHelden.SHES.App.Messages;
+using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using KnxHelden.SHES.Services.Devices;
 using System;

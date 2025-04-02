@@ -23,12 +23,14 @@ using KnxHelden.SHES.Controls.Converters;
 using Microsoft.UI.Xaml.Markup;
 using Microsoft.Windows.Management.Deployment;
 using KnxHelden.SHES.Controls.FormFieldService;
+using KnxHelden.SHES.Services.Manufacturers;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
     public sealed class ProjectItemDetailsComponentModel : ObservableRecipient
     {
         private readonly ResourceLoader _resourceLoader;
+        private readonly IManufacturerService _manufacturerService;
         private readonly IDeviceService _deviceService;
         private readonly IFormFieldService _formFieldService;
 
@@ -55,9 +57,10 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #region --- Constructor ---
 
-        public ProjectItemDetailsComponentModel(ResourceLoader resourceLoader, IDeviceService deviceService, IFormFieldService formFieldService)
+        public ProjectItemDetailsComponentModel(ResourceLoader resourceLoader, IManufacturerService manufacturerService, IDeviceService deviceService, IFormFieldService formFieldService)
         {
             _resourceLoader = resourceLoader;
+            _manufacturerService = manufacturerService;
             _deviceService = deviceService;
             _formFieldService = formFieldService;
 
@@ -85,8 +88,10 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #region --- Methods ---
 
-        private void LoadFormFields()
+        private async void LoadFormFields()
         {
+            var manufacturers = await _manufacturerService.GetAllAsync();
+
             FormFields.Clear();
 
             // General device fields
@@ -99,8 +104,8 @@ namespace KnxHelden.SHES.App.ComponentModels
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_BusType"),
                 _formFieldService.GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType), FormField_SaveChanges)));
 
-            //FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
-            //    _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Manufacturer), FormField_SaveChanges)));
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
+                _formFieldService.GetComboBox(CurrentDevice, "Manufacturer", FormField_SaveChanges, manufacturers, "Name", "Id")));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_OrderNumber"),
                 _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber), FormField_SaveChanges)));

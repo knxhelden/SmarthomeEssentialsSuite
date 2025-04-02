@@ -10,6 +10,8 @@ namespace KnxHelden.SHES.Models.Observables
 {
     public class ObservableDevice : ObservableProjectItem
     {
+        //public new readonly Device entity;
+
         public string Identifier
         {
             get => ((Device)entity).Identifier;
