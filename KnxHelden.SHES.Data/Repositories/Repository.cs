@@ -38,22 +38,11 @@ namespace KnxHelden.SHES.Data.Repositories
         /// <summary>Gets all entities asynchronous.</summary>
         /// <param name="orderBy">The property to order by.</param>
         /// <returns>Returns a list of all entities.</returns>
-        public async Task<List<TEntity>> GetAllAsync(string includeProperties = "", string orderBy = "")
+        public async Task<List<TEntity>> GetAllAsync(string orderBy = "")
         {
             try
             {
                 var query = this._dbContext.Set<TEntity>().AsQueryable();
-
-                // Include Properties
-                if (!string.IsNullOrWhiteSpace(includeProperties))
-                {
-                    string[] includes = includeProperties.Split(';');
-
-                    foreach (string include in includes)
-                    {
-                        query = query.Include(include);
-                    }
-                }
 
                 // Order by
                 if (!string.IsNullOrWhiteSpace(orderBy))
@@ -72,24 +61,12 @@ namespace KnxHelden.SHES.Data.Repositories
 
         /// <summary>Gets an entity by identifier asynchronous.</summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="includeProperties">The semicolon (;) separated included properties.</param>
         /// <returns>Returns an entity.</returns>
-        public async Task<TEntity> GetByIdAsync(Guid id, string includeProperties = "")
+        public async Task<TEntity> GetByIdAsync(Guid id)
         {
             try
             {
                 var query = this._dbContext.Set<TEntity>().Where(e => e.Id == id);
-
-                // Include Properties
-                if (!string.IsNullOrWhiteSpace(includeProperties))
-                {
-                    string[] includes = includeProperties.Split(';');
-
-                    foreach (string include in includes)
-                    {
-                        query = query.Include(include);
-                    }
-                }
 
                 return await query.SingleOrDefaultAsync();
             }
@@ -102,25 +79,13 @@ namespace KnxHelden.SHES.Data.Repositories
 
         /// <summary>Gets an entity by expression asynchronous.</summary>
         /// <param name="expression">The expression.</param>
-        /// <param name="includeProperties">The semicolon (;) separated included properties.</param>
         /// <param name="orderBy">The property to order by.</param>
         /// <returns>Returns an entity.</returns>
-        public async Task<List<TEntity>> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression, string includeProperties = "", string orderBy = "")
+        public async Task<List<TEntity>> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression, string orderBy = "")
         {
             try
             {
                 var query = this._dbContext.Set<TEntity>().Where(expression);
-
-                // Include Properties
-                if (!string.IsNullOrWhiteSpace(includeProperties))
-                {
-                    string[] includes = includeProperties.Split(';');
-
-                    foreach (string include in includes)
-                    {
-                        query = query.Include(include);
-                    }
-                }
 
                 // Order by
                 if(!string.IsNullOrWhiteSpace(orderBy))

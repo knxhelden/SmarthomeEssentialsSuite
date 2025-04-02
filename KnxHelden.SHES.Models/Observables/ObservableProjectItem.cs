@@ -55,7 +55,7 @@ namespace KnxHelden.SHES.Models.Observables
         {
             if (projectItem != null)
             {
-                if (projectItem.GetType().GetCustomAttributes(typeof(ProjectItemInfoAttribute), false).FirstOrDefault() is ProjectItemInfoAttribute attribute)
+                if (projectItem.GetType().GetCustomAttributes(typeof(ProjectItemInfoAttribute), true).FirstOrDefault() is ProjectItemInfoAttribute attribute)
                 {
                     this._icon = attribute.Icon;
                 }

@@ -9,7 +9,7 @@ namespace KnxHelden.SHES.Models.Entities
         [Required]
         public string Name { get; set; }
 
-        public ICollection<Device> Devices { get; set; } = new Collection<Device>();
+        public virtual ICollection<Device> Devices { get; set; } = new Collection<Device>();
 
         public override string ToString()
         {

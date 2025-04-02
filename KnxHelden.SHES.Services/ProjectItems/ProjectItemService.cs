@@ -32,7 +32,7 @@ namespace KnxHelden.SHES.Services.ProjectItems
         {
             try
             {
-                ProjectItem projectItem = await this._projectItemRepository.GetByIdAsync(id, "Parent");
+                ProjectItem projectItem = await this._projectItemRepository.GetByIdAsync(id);
                 return new ObservableProjectItem(projectItem);
             }
             catch

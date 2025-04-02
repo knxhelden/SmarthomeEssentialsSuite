@@ -32,7 +32,7 @@ namespace KnxHelden.SHES.Models.Entities
 
         public ItemState State { get; set; }
 
-        public ICollection<Building> Buildings { get; set; } = new Collection<Building>();
+        public virtual ICollection<Building> Buildings { get; set; } = new Collection<Building>();
 
         public Project()
         {

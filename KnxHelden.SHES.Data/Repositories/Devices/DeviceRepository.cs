@@ -30,7 +30,7 @@ namespace KnxHelden.SHES.Data.Repositories.Devices
             try
             {
                 // TODO: Dies muss definitiv noch optimiert werden!
-                var parent = await this._dbContext.ProjectItems.Include("Children.Children.Children.Children.Children.Children.Children.Children.Children")
+                var parent = await this._dbContext.ProjectItems
                     .FirstOrDefaultAsync(pi => pi.Id == projectItem.Id);
 
                 if (parent != null)

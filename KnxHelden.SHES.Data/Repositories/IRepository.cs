@@ -10,20 +10,18 @@ namespace KnxHelden.SHES.Data.Repositories
         /// <summary>Gets all entities asynchronous.</summary>
         /// <param name="orderBy">The property to order by.</param>
         /// <returns>Returns a list of all entities.</returns>
-        Task<List<TEntity>> GetAllAsync(string includeProperties = "", string orderBy = "");
+        Task<List<TEntity>> GetAllAsync(string orderBy = "");
 
         /// <summary>Gets an entity by identifier asynchronous.</summary>
         /// <param name="id">The identifier.</param>
-        /// <param name="includeProperties">The semicolon (;) separated included properties.</param>
         /// <returns>Returns an entity.</returns>
-        Task<TEntity> GetByIdAsync(Guid id, string includeProperties = "");
+        Task<TEntity> GetByIdAsync(Guid id);
 
         /// <summary>Gets an entity by expression asynchronous.</summary>
         /// <param name="expression">The expression.</param>
-        /// <param name="includeProperties">The semicolon (;) separated included properties.</param>
         /// <param name="orderBy">The property to order by.</param>
         /// <returns>Returns an entity.</returns>
-        Task<List<TEntity>> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression, string includeProperties = "", string orderBy = "");
+        Task<List<TEntity>> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression, string orderBy = "");
 
         /// <summary>Adds an entity asynchronous.</summary>
         /// <param name="entity">The entity.</param>

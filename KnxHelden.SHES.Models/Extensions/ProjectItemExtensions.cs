@@ -67,7 +67,7 @@ namespace KnxHelden.SHES.Models.Extensions
                 var next = stack.Pop();
                 if (filterType != null)
                 {
-                    if(next.GetType() == filterType)
+                    if (filterType == null || filterType.IsAssignableFrom(next.GetType()))
                     {
                         yield return next;
                     }

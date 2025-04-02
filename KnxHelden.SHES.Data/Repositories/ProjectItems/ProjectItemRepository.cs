@@ -43,7 +43,6 @@ namespace KnxHelden.SHES.Data.Repositories.ProjectItems
         private IEnumerable<ProjectItem> LoadProjectItemChildren(Guid projectId, bool includeDevices)
         {
             IQueryable<ProjectItem> projectItems = this._dbContext.Buildings
-                .Include(b => b.Children)
                 .Where(b => b.Project.Id == projectId);
 
             foreach (ProjectItem entity in projectItems)
@@ -59,7 +58,6 @@ namespace KnxHelden.SHES.Data.Repositories.ProjectItems
         {
             List<ProjectItem> children = this._dbContext.ProjectItems
                 .Where(pi => pi.Parent != null && pi.Parent.Id == parent.Id)
-                .Include(pi => pi.Parent)
                 .ToList();
 
             if (!includeDevices)

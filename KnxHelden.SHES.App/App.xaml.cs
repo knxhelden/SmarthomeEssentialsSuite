@@ -80,6 +80,7 @@ namespace KnxHelden.SHES.App
 
                 options.UseSqlite($"Data Source={System.IO.Path.Combine(shesDatabasePath, "shes.db")};");
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseLazyLoadingProxies();
             });
 
             // Repositories

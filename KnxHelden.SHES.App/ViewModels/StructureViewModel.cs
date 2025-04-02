@@ -91,18 +91,21 @@ namespace KnxHelden.SHES.App.ViewModels
             this.CabinetTabVisibility = Visibility.Collapsed;
             this.DetailsTabVisibility = Visibility.Collapsed;
 
-            switch (locationType.Name)
+            // Device Tab
+            if (typeof(Device).IsAssignableFrom(locationType))
             {
-                case nameof(Device):
-                    this.DetailsTabVisibility = Visibility.Visible;
-                    break;
-                case nameof(Cabinet):
-                    this.LocationTabVisibility = Visibility.Visible;
-                    this.CabinetTabVisibility = Visibility.Visible;
-                    break;
-                default:
-                    this.LocationTabVisibility = Visibility.Visible;
-                    break;
+                this.DetailsTabVisibility = Visibility.Visible;
+            }
+            // Cabinet Tab
+            else if (typeof(Cabinet).IsAssignableFrom(locationType))
+            {
+                this.LocationTabVisibility = Visibility.Visible;
+                this.CabinetTabVisibility = Visibility.Visible;
+            }
+            // Location Tab
+            else
+            {
+                this.LocationTabVisibility = Visibility.Visible;
             }
         }
 

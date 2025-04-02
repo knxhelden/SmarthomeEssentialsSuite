@@ -30,7 +30,7 @@
         <ScrollViewer x:Name="ProjectTreeScrollViewer" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled">
             <StackPanel>
                 <TreeView ItemsSource="{x:Bind ViewModel.ProjectItems, Mode=OneWay}"
-          SelectedItem="{x:Bind ViewModel.SelectedProjectItem, Mode=TwoWay}">
+                          SelectedItem="{x:Bind ViewModel.SelectedProjectItem, Mode=TwoWay}">
                     <TreeView.ItemTemplate>
                         <DataTemplate x:DataType="observables:ObservableProjectItem">
                             <TreeViewItem ItemsSource="{x:Bind Children, Mode=OneWay}">
