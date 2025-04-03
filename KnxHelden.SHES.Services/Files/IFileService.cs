@@ -1,6 +1,6 @@
 ﻿namespace KnxHelden.SHES.Services.Files
 {
-    public interface IFileService
+    public interface IFileService : IService
     {
         T Read<T>(string folderPath, string fileName);
 

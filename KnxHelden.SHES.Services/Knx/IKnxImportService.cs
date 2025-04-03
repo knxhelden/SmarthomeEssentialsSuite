@@ -2,7 +2,7 @@
 
 namespace KnxHelden.SHES.Services.Knx
 {
-    public interface IKnxImportService
+    public interface IKnxImportService : IService
     {
         /// <summary>
         /// Imports a KNX project file asynchronously.

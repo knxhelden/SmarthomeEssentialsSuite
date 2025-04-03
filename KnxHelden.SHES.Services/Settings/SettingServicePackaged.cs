@@ -4,7 +4,7 @@ using Windows.Storage;
 
 namespace KnxHelden.SHES.Services.Settings
 {
-    public class SettingServicePackaged : ISettingService
+    public class SettingServicePackaged : ServiceBase, ISettingService
     {
         public async Task<T> ReadSettingAsync<T>(string key)
         {

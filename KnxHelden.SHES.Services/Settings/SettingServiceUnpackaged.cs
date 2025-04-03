@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KnxHelden.SHES.Services.Settings
 {
-    public class SettingServiceUnpackaged : ISettingService
+    public class SettingServiceUnpackaged : ServiceBase, ISettingService
     {
         private readonly IFileService _fileService;
         private readonly LocalSettingsOptions _options;

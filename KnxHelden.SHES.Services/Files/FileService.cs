@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KnxHelden.SHES.Services.Files
 {
-    public class FileService : IFileService
+    public class FileService : ServiceBase, IFileService
     {
         public T Read<T>(string folderPath, string fileName)
         {
