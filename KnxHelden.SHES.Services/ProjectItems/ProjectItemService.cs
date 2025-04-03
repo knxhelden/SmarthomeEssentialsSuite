@@ -46,7 +46,7 @@ namespace KnxHelden.SHES.Services.ProjectItems
             try
             {
                 // Insert new project item
-                await this._projectItemRepository.AddAsync(observableProjectItem.entity);
+                await this._projectItemRepository.CreateAsync(observableProjectItem.entity);
                 return observableProjectItem;
             }
             catch
@@ -60,7 +60,7 @@ namespace KnxHelden.SHES.Services.ProjectItems
             // Insert new project items
             foreach(var item in observableProjectItems)
             {
-                await this._projectItemRepository.AddAsync(item.entity);
+                await this._projectItemRepository.CreateAsync(item.entity);
             }
         }
 

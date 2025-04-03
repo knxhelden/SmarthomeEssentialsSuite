@@ -164,7 +164,7 @@ namespace KnxHelden.SHES.App.ViewModels
         private async Task AddProject(ContentDialog dialog)
         {
             // Add project
-            await _projectService.InsertAsync(NewProject);
+            await _projectService.CreateAsync(NewProject);
             ProjectList.Add(NewProject);
 
             WeakReferenceMessenger.Default.Send(new AppBarSenderMessage(new AppInfoBarViewModel

@@ -105,7 +105,7 @@ namespace KnxHelden.SHES.Data.Repositories
         /// <summary>Adds an entity asynchronous.</summary>
         /// <param name="entity">The entity.</param>
         /// <exception cref="System.ArgumentNullException">entity - Entity must not be null.</exception>
-        public async Task AddAsync(TEntity entity)
+        public async Task CreateAsync(TEntity entity)
         {
             if (entity == null)
             {

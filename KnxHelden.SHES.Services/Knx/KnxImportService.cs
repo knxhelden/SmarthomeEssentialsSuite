@@ -99,7 +99,7 @@ namespace KnxHelden.SHES.Services.Knx
                 // Add new project
                 if (!await this._projectRepository.ExistsAsync(this._project.Name))
                 {
-                    await this._projectRepository.AddAsync(this._project);
+                    await this._projectRepository.CreateAsync(this._project);
                     this._result.Data.Project = new ObservableProject(this._project);
                 }
                 else
