@@ -18,9 +18,7 @@ namespace KnxHelden.SHES.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,9 +33,7 @@ namespace KnxHelden.SHES.Data.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Comment = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,9 +60,7 @@ namespace KnxHelden.SHES.Data.Migrations
                     ConstructionStreet = table.Column<string>(type: "TEXT", nullable: true),
                     ConstructionPostalCode = table.Column<string>(type: "TEXT", nullable: true),
                     ConstructionCity = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    State = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -346,11 +340,11 @@ namespace KnxHelden.SHES.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Manufacturers",
-                columns: new[] { "Id", "CreationTime", "LastModificationTime", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Siemens" },
-                    { new Guid("9a644771-78cf-4088-aa18-29575d0d643c"), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "MDT" }
+                    { new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"), "Siemens" },
+                    { new Guid("9a644771-78cf-4088-aa18-29575d0d643c"), "MDT" }
                 });
 
             migrationBuilder.CreateIndex(

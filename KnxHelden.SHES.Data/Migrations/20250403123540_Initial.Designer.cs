@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KnxHelden.SHES.Data.Migrations
 {
     [DbContext(typeof(ShesDbContext))]
-    [Migration("20250401145927_Initial")]
+    [Migration("20250403123540_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,12 +26,6 @@ namespace KnxHelden.SHES.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -44,15 +38,11 @@ namespace KnxHelden.SHES.Data.Migrations
                         new
                         {
                             Id = new Guid("9a644771-78cf-4088-aa18-29575d0d643c"),
-                            CreationTime = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastModificationTime = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "MDT"
                         },
                         new
                         {
                             Id = new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"),
-                            CreationTime = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastModificationTime = new DateTime(2024, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Siemens"
                         });
                 });
@@ -84,12 +74,6 @@ namespace KnxHelden.SHES.Data.Migrations
                     b.Property<string>("ConstructionStreet")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -115,13 +99,7 @@ namespace KnxHelden.SHES.Data.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
