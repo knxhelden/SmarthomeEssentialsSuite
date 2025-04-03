@@ -10,8 +10,6 @@ namespace KnxHelden.SHES.Models.Observables
 {
     public class ObservableDevice : ObservableProjectItem
     {
-        //public new readonly Device entity;
-
         public string Identifier
         {
             get => ((Device)entity).Identifier;
@@ -97,7 +95,7 @@ namespace KnxHelden.SHES.Models.Observables
 
         public ObservableManufacturer Manufacturer
         {
-            get => new ObservableManufacturer(((Device)entity).Manufacturer ?? null);
+            get => ((Device)entity).Manufacturer != null ? new ObservableManufacturer(((Device)entity).Manufacturer) : null;
             set
             {
                 if (value != null)

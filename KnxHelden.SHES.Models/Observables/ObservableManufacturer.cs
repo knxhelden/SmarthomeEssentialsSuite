@@ -27,14 +27,5 @@ namespace KnxHelden.SHES.Models.Observables
         { }
 
         #endregion
-
-        public override bool Equals(object obj)
-        {
-            if (obj is ObservableManufacturer other)
-            {
-                return this.Id == other.Id;
-            }
-            return false;
-        }
     }
 }

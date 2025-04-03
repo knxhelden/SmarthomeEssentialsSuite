@@ -65,7 +65,6 @@ namespace KnxHelden.SHES.App.ComponentModels
             _formFieldService = formFieldService;
 
             // Messages
-            //WeakReferenceMessenger.Default.Register<ProjectItemDetailsComponentModel, CurrentProjectItemSenderMessage>(this, (r, m) => r.CurrentDevice = m.Value);
             WeakReferenceMessenger.Default.Register<ProjectItemDetailsComponentModel, CurrentProjectItemSenderMessage>(this, (r, m) =>
             {
                 if (m.Value.entity is Device device)
@@ -104,8 +103,8 @@ namespace KnxHelden.SHES.App.ComponentModels
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_BusType"),
                 _formFieldService.GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType), FormField_SaveChanges)));
 
-            //FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
-            //    _formFieldService.GetComboBox(CurrentDevice, "Manufacturer", FormField_SaveChanges, manufacturers, "Name", "Id")));
+            FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
+                _formFieldService.GetComboBox(CurrentDevice, "Manufacturer", FormField_SaveChanges, manufacturers, "Name", "Id")));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_OrderNumber"),
                 _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber), FormField_SaveChanges)));

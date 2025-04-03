@@ -65,5 +65,20 @@ namespace KnxHelden.SHES.Models.Observables
         }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null) return false; // Return false if obj is null
+            if (ReferenceEquals(this, obj)) return true; // Return true if both references point to the same object
+            if (obj.GetType() != GetType()) return false; // Return false if the types do not match
+
+            var other = (ObservableBase<TEntity>)obj;
+            return Id == other.Id; // Compare by Id
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }
