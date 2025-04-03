@@ -24,14 +24,10 @@ namespace KnxHelden.SHES.Controls.FormFieldService
         /// </summary>
         /// <param name="source">The source object that contains the property to bind.</param>
         /// <param name="propertyName">The name of the property to bind to the <see cref="TextBox.Text"/> property.</param>
-        /// <param name="losingFocusHandler">
-        /// An optional event handler for the <see cref="UIElement.LosingFocus"/> event.
-        /// If provided, the handler is attached to the <see cref="TextBox"/>.
-        /// </param>
         /// <returns>
         /// A <see cref="TextBox"/> instance with a two-way binding to the specified property and an optional event handler.
         /// </returns>
-        public TextBox GetTextBox(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler)
+        public TextBox GetTextBox(object source, string propertyName)
         {
             var textBox = new TextBox();
 
@@ -43,11 +39,32 @@ namespace KnxHelden.SHES.Controls.FormFieldService
                 Mode = BindingMode.TwoWay
             });
 
-            // Attach the LosingFocus event handler if provided
-            if (losingFocusHandler != null)
-                textBox.LosingFocus += losingFocusHandler;
-
             return textBox;
+        }
+
+        /// <summary>
+        /// Creates a NumberBox with a two-way binding to a specified property and an optional LosingFocus event handler.
+        /// </summary>
+        /// <param name="source">The source object to which the NumberBox will be bound.</param>
+        /// <param name="propertyName">The name of the property on the source object to bind to.</param>
+        /// <param name="smallChange">The amount by which the value changes when the spin buttons are clicked. Default is 1.</param>
+        /// <returns>A configured NumberBox control.</returns>
+        public NumberBox GetNumberBox(object source, string propertyName, double smallChange = 1)
+        {
+            var numberBox = new NumberBox
+            {
+                SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
+                SmallChange = smallChange
+            };
+            // Set up two-way data binding to the specified property
+            numberBox.SetBinding(NumberBox.ValueProperty, new Binding
+            {
+                Source = source,
+                Path = new PropertyPath(propertyName),
+                Mode = BindingMode.TwoWay
+            });
+
+            return numberBox;
         }
 
         /// <summary>
@@ -56,15 +73,11 @@ namespace KnxHelden.SHES.Controls.FormFieldService
         /// <typeparam name="T">The enumeration type to populate the <see cref="ComboBox"/> with.</typeparam>
         /// <param name="source">The source object that contains the property to bind.</param>
         /// <param name="propertyName">The name of the property to bind to the <see cref="ComboBox.SelectedItem"/> property.</param>
-        /// <param name="losingFocusHandler">
-        /// An optional event handler for the <see cref="UIElement.LosingFocus"/> event.
-        /// If provided, the handler is attached to the <see cref="ComboBox"/>.
-        /// </param>
         /// <returns>
         /// A <see cref="ComboBox"/> populated with the values of the specified enumeration type
         /// and a two-way binding to the specified property.
         /// </returns>
-        public ComboBox GetEnumComboBox<T>(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler) where T : struct, Enum
+        public ComboBox GetEnumComboBox<T>(object source, string propertyName) where T : struct, Enum
         {
             var comboBox = new ComboBox
             {
@@ -89,10 +102,6 @@ namespace KnxHelden.SHES.Controls.FormFieldService
                 Mode = BindingMode.TwoWay
             });
 
-            // Attach the LosingFocus event handler if provided
-            if (losingFocusHandler != null)
-                comboBox.LosingFocus += losingFocusHandler;
-
             return comboBox;
         }
 
@@ -101,14 +110,10 @@ namespace KnxHelden.SHES.Controls.FormFieldService
         /// </summary>
         /// <param name="source">The source object that contains the property to bind.</param>
         /// <param name="propertyName">The name of the property to bind to the <see cref="CheckBox.IsChecked"/> property.</param>
-        /// <param name="clickHandler">
-        /// An optional event handler for the <see cref="CheckBox.Click"/> event.
-        /// If provided, the handler is attached to the <see cref="CheckBox"/>.
-        /// </param>
         /// <returns>
         /// A <see cref="CheckBox"/> with a two-way binding to the specified property.
         /// </returns>
-        public CheckBox GetCheckBox(object source, string propertyName, RoutedEventHandler clickHandler)
+        public CheckBox GetCheckBox(object source, string propertyName)
         {
             var checkBox = new CheckBox();
 
@@ -120,10 +125,6 @@ namespace KnxHelden.SHES.Controls.FormFieldService
                 Mode = BindingMode.TwoWay
             });
 
-            // Attach the Click event handler if provided
-            if (clickHandler != null)
-                checkBox.Click += clickHandler;
-
             return checkBox;
         }
 
@@ -133,10 +134,6 @@ namespace KnxHelden.SHES.Controls.FormFieldService
         /// <typeparam name="T">The type of items in the provided <paramref name="itemSource"/>.</typeparam>
         /// <param name="source">The source object that contains the property to bind.</param>
         /// <param name="propertyName">The name of the property to bind to the <see cref="ComboBox.SelectedItem"/> property.</param>
-        /// <param name="losingFocusHandler">
-        /// An optional event handler for the <see cref="UIElement.LosingFocus"/> event.
-        /// If provided, the handler is attached to the <see cref="ComboBox"/>.
-        /// </param>
         /// <param name="itemSource">The collection of items to be displayed in the <see cref="ComboBox"/>.</param>
         /// <param name="displayMemberPath">
         /// The name of the property to display in the <see cref="ComboBox"/> when binding complex objects.
@@ -148,7 +145,7 @@ namespace KnxHelden.SHES.Controls.FormFieldService
         /// <returns>
         /// A <see cref="ComboBox"/> bound to the specified property, populated with the provided items.
         /// </returns>
-        public ComboBox GetComboBox<T>(object source, string propertyName, TypedEventHandler<UIElement, LosingFocusEventArgs> losingFocusHandler, IEnumerable<T> itemSource, string displayMemberPath = "", string selectedValuePath = "") where T : class
+        public ComboBox GetComboBox<T>(object source, string propertyName, IEnumerable<T> itemSource, string displayMemberPath = "", string selectedValuePath = "") where T : class
         {
             var comboBox = new ComboBox
             {
@@ -163,10 +160,6 @@ namespace KnxHelden.SHES.Controls.FormFieldService
                 Path = new PropertyPath(propertyName),
                 Mode = BindingMode.TwoWay
             });
-
-            // Attach the LosingFocus event handler if provided
-            if (losingFocusHandler != null)
-                comboBox.LosingFocus += losingFocusHandler;
 
             return comboBox;
         }

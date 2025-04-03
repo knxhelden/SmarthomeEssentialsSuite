@@ -11,6 +11,7 @@ using KnxHelden.SHES.Services.Manufacturers;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -29,11 +30,18 @@ namespace KnxHelden.SHES.App.ComponentModels
             get => _currentDevice;
             private set
             {
-                if (value != null)
+                if (_currentDevice != value)
                 {
-                    SetProperty(ref _currentDevice, value);
+                    if (_currentDevice != null)
+                    {
+                        // Remove the old event handler to prevent memory leaks and duplicate event calls
+                        _currentDevice.PropertyChanged -= OnDevicePropertyChanged;
+                    }
+                    _currentDevice = value;
+                    this.GenerateFormFields();
 
-                    this.LoadFormFields();
+                    // Add the event handler to listen for changes in the new device
+                    _currentDevice.PropertyChanged += OnDevicePropertyChanged;
                 }
             }
         }
@@ -65,7 +73,7 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #region --- Events ---
 
-        public async void FormField_SaveChanges(object sender, object e)
+        private async void OnDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             await this._deviceService.UpdateAsync(this.CurrentDevice);
         }
@@ -74,7 +82,7 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         #region --- Methods ---
 
-        private async void LoadFormFields()
+        private async void GenerateFormFields()
         {
             var manufacturers = await _manufacturerService.GetAllAsync();
 
@@ -82,28 +90,28 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             // General device fields
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"),
-    _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier), FormField_SaveChanges)));
+    _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DeviceType"),
-                _formFieldService.GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type), FormField_SaveChanges)));
+                _formFieldService.GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_BusType"),
-                _formFieldService.GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType), FormField_SaveChanges)));
+                _formFieldService.GetEnumComboBox<BusType>(CurrentDevice, nameof(CurrentDevice.BusType))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Manufacturer"),
-                _formFieldService.GetComboBox(CurrentDevice, "Manufacturer", FormField_SaveChanges, manufacturers, "Name", "Id")));
+                _formFieldService.GetComboBox(CurrentDevice, "Manufacturer", manufacturers, "Name", "Id")));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_OrderNumber"),
-                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber), FormField_SaveChanges)));
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_PhysicalKnxAddress"),
                 new TextBox()));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_RailMount"),
-                _formFieldService.GetCheckBox(CurrentDevice, nameof(CurrentDevice.IsRailMounted), FormField_SaveChanges)));
+                _formFieldService.GetCheckBox(CurrentDevice, nameof(CurrentDevice.IsRailMounted))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DivisionUnits"),
-                new ComboBox()));
+                _formFieldService.GetNumberBox(CurrentDevice, nameof(CurrentDevice.DivisionUnits))));
         }
 
         #endregion
