@@ -1,29 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using KnxHelden.SHES.Controls;
-using KnxHelden.SHES.Models.Observables;
-using Microsoft.UI.Xaml.Controls;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Windows.ApplicationModel.Resources;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm;
 using KnxHelden.SHES.App.Messages;
-using KnxHelden.SHES.Models.Enumerations;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml;
-using KnxHelden.SHES.Models.Entities;
-using KnxHelden.SHES.Services.Devices;
-using KnxHelden.SHES.Controls.Converters;
-using Microsoft.UI.Xaml.Markup;
-using Microsoft.Windows.Management.Deployment;
+using KnxHelden.SHES.Controls;
 using KnxHelden.SHES.Controls.FormFieldService;
+using KnxHelden.SHES.Models.Entities;
+using KnxHelden.SHES.Models.Enumerations;
+using KnxHelden.SHES.Models.Observables;
+using KnxHelden.SHES.Services.Devices;
 using KnxHelden.SHES.Services.Manufacturers;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
+using System.Collections.ObjectModel;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -110,13 +97,13 @@ namespace KnxHelden.SHES.App.ComponentModels
                 _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber), FormField_SaveChanges)));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_PhysicalKnxAddress"),
-                new TextBox())); // Kein Event nötig
+                new TextBox()));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_RailMount"),
                 _formFieldService.GetCheckBox(CurrentDevice, nameof(CurrentDevice.IsRailMounted), FormField_SaveChanges)));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DivisionUnits"),
-                new ComboBox())); // Kein Event nötig
+                new ComboBox()));
         }
 
         #endregion

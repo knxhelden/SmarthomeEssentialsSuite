@@ -1,29 +1,27 @@
-﻿using KnxHelden.SHES.Data.Repositories.Projects;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using KnxHelden.SHES.Data.Repositories.Projects;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
 using KnxHelden.SHES.Models.Observables;
-using KnxHelden.SHES.Services.Projects;
 using KnxHelden.SHES.Shared.Extensions;
-using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Extensions.Logging;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Windows.UI.Core;
 
 namespace KnxHelden.SHES.Services.Knx
 {
-    /// <summary>Executes the import of an ETS file (KNX).</summary>
+    /// <summary>
+    /// Service for importing ETS (KNX) project files.
+    /// </summary>
     public class KnxImportService : ServiceBase, IKnxImportService
     {
         #region --- Fields ---
@@ -42,8 +40,9 @@ namespace KnxHelden.SHES.Services.Knx
 
         private readonly IProjectRepository _projectRepository;
 
-        /// <summary>The project type mapping dictionary.</summary>
-        /// <remarks>Mapping is necessary because the project types in the ETS have different names than in SHES.</remarks>
+        /// <summary>
+        /// Dictionary for mapping ETS project types to SHES project types.
+        /// </summary>
         private static readonly Dictionary<string, string> projectTypeMapping = new()
         {
             { "Building", "Building" },
@@ -56,20 +55,22 @@ namespace KnxHelden.SHES.Services.Knx
 
         #endregion
 
-        /// <summary>Initializes a new instance of the <see cref="KnxImportService" /> class.</summary>
-        /// <param name="resourceLoader">The resource loader.</param>
-        /// <param name="logger">The logger.</param>
-        /// <param name="projectRepository">The project repository.</param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KnxImportService"/> class.
+        /// </summary>
+        /// <param name="resourceLoader">Resource loader for localized strings.</param>
+        /// <param name="logger">Logger for logging events.</param>
+        /// <param name="projectRepository">Repository for accessing project data.</param>
         public KnxImportService(ResourceLoader resourceLoader, ILogger<KnxImportService> logger, IProjectRepository projectRepository)
             : base(resourceLoader, logger) => _projectRepository = projectRepository;
 
         #region --- IKnxImportService ---
 
-        /// <summary>Checks asynchronously whether the KNX project is protected with a password.</summary>
-        /// <param name="path">The path of KNX project.</param>
-        /// <returns>
-        ///   Returns the result of the check.
-        /// </returns>
+        /// <summary>
+        /// Checks asynchronously if the KNX project file is password-protected.
+        /// </summary>
+        /// <param name="path">Path to the KNX project file.</param>
+        /// <returns>True if the project is password-protected, otherwise false.</returns>
         public async Task<bool> ProtectionCheckAsync(string path) => await Task.Run(() =>
         {
             using var file = File.OpenRead(path);
@@ -77,11 +78,13 @@ namespace KnxHelden.SHES.Services.Knx
             return zip.Cast<ZipEntry>().Any(entry => Regex.IsMatch(entry.Name, @"P-\w{4}.zip$"));
         });
 
-        /// <summary>Imports the project asynchronous.</summary>
-        /// <param name="path">The path.</param>
-        /// <param name="options">Options for the project import.</param>
-        /// <param name="password">The KNX project password.</param>
-        /// <returns>Returns a result with project data.</returns>
+        /// <summary>
+        /// Imports a KNX project file asynchronously.
+        /// </summary>
+        /// <param name="path">Path to the KNX project file.</param>
+        /// <param name="options">Import options for processing the project.</param>
+        /// <param name="password">Optional password for encrypted project files.</param>
+        /// <returns>Result of the import operation containing project data.</returns>
         public async Task<KnxImportResult> ImportProjectAsync(string path, KnxImportOptions options, string password = "")
         {
             this._options = options;
@@ -111,9 +114,11 @@ namespace KnxHelden.SHES.Services.Knx
 
         #endregion
 
-        /// <summary>Unzips files from an ETS project file and processes them</summary>
-        /// <param name="file">The file to unzip.</param>
-        /// <param name="password">The zip file password.</param>
+        /// <summary>
+        /// Extracts and processes files from an ETS project archive.
+        /// </summary>
+        /// <param name="file">Stream representing the ETS project archive.</param>
+        /// <param name="password">Password for encrypted project files.</param>
         private async Task UnzipAsync(Stream file, string password)
         {
             try
@@ -185,10 +190,11 @@ namespace KnxHelden.SHES.Services.Knx
             }
         }
 
-        /// <summary>Reads the XML schema version of the ETS project file asynchronous.</summary>
-        /// <param name="zipEntry">The zip entry.</param>
-        /// <param name="zip">The zip.</param>
-        /// <remarks>The ETS version with which the project was last processed can be derived from the version of the XML schema.</remarks>
+        /// <summary>
+        /// Reads the ETS XML schema version from the master file.
+        /// </summary>
+        /// <param name="zipEntry">The zip entry containing the schema file.</param>
+        /// <param name="zip">Reference to the ZIP archive.</param>
         private async Task ReadEtsSchemaVersionAsync(ZipEntry zipEntry, ZipFile zip)
         {
             await Task.Run(() =>
@@ -199,10 +205,11 @@ namespace KnxHelden.SHES.Services.Knx
             });
         }
 
-        /// <summary>Reads out all products that are used in the ETS project asynchronous.</summary>
-        /// <param name="zipEntry">The zip entry.</param>
-        /// <param name="zip">The zip.</param>
-        /// <remarks>The information is located directly in the root directory of the project file in the M-{XXXX} folders</remarks>
+        /// <summary>
+        /// Asynchronously reads the hardware information (Hardware.xml) from the KNX project archive and extracts product details.
+        /// </summary>
+        /// <param name="zipEntry">The zip entry corresponding to the hardware file (Hardware.xml).</param>
+        /// <param name="zip">The zip file containing the hardware file.</param>
         private async Task ReadHardwareAsync(ZipEntry zipEntry, ZipFile zip)
         {
             var stream = zip.GetInputStream(zipEntry);
@@ -228,10 +235,11 @@ namespace KnxHelden.SHES.Services.Knx
             }
         }
 
-        /// <summary>Reads the project asynchronous.</summary>
-        /// <param name="zipEntry">The zip entry.</param>
-        /// <param name="zip">The zip.</param>
-        /// <remarks>This is the project.xml in the project folder P-{XXXX}.</remarks>
+        /// <summary>
+        /// Asynchronously reads the project information (project.xml) from the KNX project archive and extracts key project details.
+        /// </summary>
+        /// <param name="zipEntry">The zip entry corresponding to the project file (project.xml).</param>
+        /// <param name="zip">The zip file containing the project file.</param>
         private async Task ReadProjectAsync(ZipEntry zipEntry, ZipFile zip)
         {
             using var stream = zip.GetInputStream(zipEntry);
@@ -247,10 +255,11 @@ namespace KnxHelden.SHES.Services.Knx
             this._project.Name = projectInfo?.Attribute(XName.Get("Name"))?.Value ?? "UNKNOWN";
         }
 
-        /// <summary>Reads the structure file asynchronous.</summary>
-        /// <param name="zipEntry">The zip entry.</param>
-        /// <param name="zip">The zip.</param>
-        /// <remarks>This is the 0.xml in the project folder P-{XXXX}.</remarks>
+        /// <summary>
+        /// Asynchronously reads the structure file (0.xml) from the KNX project archive and parses its content into XML elements.
+        /// </summary>
+        /// <param name="zipEntry">The zip entry corresponding to the structure file (0.xml).</param>
+        /// <param name="zip">The zip file containing the structure file.</param>
         private async Task ReadStructureFileAsync(ZipEntry zipEntry, ZipFile zip)
         {
             using var stream = zip.GetInputStream(zipEntry);
@@ -275,9 +284,11 @@ namespace KnxHelden.SHES.Services.Knx
 
 
 
-        /// <summary>Reads all project items from the ETS project structure.</summary>
-        /// <param name="spaces">The spaces (containers that can contain devices).</param>
-        /// <returns>Returns a hierarchical list of all project items.<br /></returns>
+        /// <summary>
+        /// Parses all project items (e.g., rooms, floors, buildings) from the provided collection of space elements and returns a hierarchical list of <see cref="ProjectItem"/> objects.
+        /// </summary>
+        /// <param name="spaces">A collection of XML elements representing spaces in the KNX project.</param>
+        /// <returns>A list of parsed <see cref="ProjectItem"/> objects representing spaces and their hierarchical structure.</returns>
         private List<ProjectItem> ReadProjectItems(IEnumerable<XElement> spaces)
         {
             return spaces.Select(space =>
@@ -316,9 +327,11 @@ namespace KnxHelden.SHES.Services.Knx
         }
 
 
-        /// <summary>Reads all devices within a space (container).</summary>
-        /// <param name="deviceInstanceReferences">The device instance references.</param>
-        /// <returns>Returns a list of devices.</returns>
+        /// <summary>
+        /// Parses all device instances within a given space (container) and returns a list of device objects.
+        /// </summary>
+        /// <param name="deviceInstanceReferences">A collection of XML elements referencing device instances.</param>
+        /// <returns>A list of parsed <see cref="Device"/> objects.</returns>
         private List<Device> ReadDevices(IEnumerable<XElement> deviceInstanceReferences)
         {
             return deviceInstanceReferences.Select(deviceInstanceReference =>
@@ -345,9 +358,11 @@ namespace KnxHelden.SHES.Services.Knx
             }).Where(device => device != null).ToList();
         }
 
-        /// <summary>Encrypts a password, as this is required from ETS6 to unpack the project file.</summary>
-        /// <param name="password">The plain text password.</param>
-        /// <returns>Returns the encrypted ETS project password.</returns>
+        /// <summary>
+        /// Encrypts a password required for unpacking ETS6 project files.
+        /// </summary>
+        /// <param name="password">Plain text password.</param>
+        /// <returns>Encrypted password.</returns>
         private string EncryptEtsPassword(string password)
         {
             int iterations = 65536;
