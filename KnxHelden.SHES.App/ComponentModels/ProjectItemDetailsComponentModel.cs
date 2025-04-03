@@ -64,7 +64,7 @@ namespace KnxHelden.SHES.App.ComponentModels
             {
                 if (m.Value.entity is Device device)
                 {
-                    CurrentDevice = _deviceService.GetDeviceAsync(m.Value.Id).Result;
+                    CurrentDevice = _deviceService.GetByIdAsync(m.Value.Id).Result;
                 }
             });
         }

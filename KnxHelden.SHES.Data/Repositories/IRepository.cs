@@ -1,11 +1,12 @@
-﻿using System;
+﻿using KnxHelden.SHES.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace KnxHelden.SHES.Data.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class, new()
+    public interface IRepository<TEntity> where TEntity : EntityBase, new()
     {
         /// <summary>Gets all entities asynchronous.</summary>
         /// <param name="orderBy">The property to order by.</param>

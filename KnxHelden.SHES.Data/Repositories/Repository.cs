@@ -25,7 +25,7 @@ namespace KnxHelden.SHES.Data.Repositories
         /// <summary>Initializes a new instance of the <see cref="Repository{TEntity}" /> class.</summary>
         /// <param name="logger">The logger.</param>
         /// <param name="dbContext">The database context.</param>
-        public Repository(ILogger logger, ShesDbContext dbContext)
+        public Repository(ILogger<Repository<TEntity>> logger, ShesDbContext dbContext)
         {
             this._logger = logger;
             this._dbContext = dbContext;
