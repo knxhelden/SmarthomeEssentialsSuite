@@ -114,10 +114,6 @@ namespace KnxHelden.SHES.Data.Repositories
 
             try
             {
-                // Set creation date and last modification time
-                entity.CreationTime = DateTime.Now;
-                entity.LastModificationTime = DateTime.Now;
-
                 await this._dbContext.AddAsync(entity);
                 await this._dbContext.SaveChangesAsync();
                 this._logger.LogInformation($"A new entity (Id: {entity.Id}) was added.");
@@ -142,9 +138,6 @@ namespace KnxHelden.SHES.Data.Repositories
             try
             {
                 this.DetachEntity(entity);
-
-                // Set last modification time
-                entity.LastModificationTime = DateTime.Now;
 
                 // set Modified flag in your entry
                 this._dbContext.Entry(entity).State = EntityState.Modified;

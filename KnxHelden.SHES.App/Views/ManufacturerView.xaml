@@ -62,15 +62,6 @@
                  Text="{x:Bind ViewModel.SelectedManufacturer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
                  Margin="0,0,0,16" />
-
-                <TextBlock x:Uid="ManufacturerView_Manufacturer_CreationDate"
-                           Margin="0,0,0,12" />
-                <TextBlock Text="{x:Bind ViewModel.SelectedManufacturer.CreationTime, Mode=OneWay}"
-                           Margin="0,0,0,16" />
-
-                <TextBlock x:Uid="ManufacturerView_Manufacturer_ModificationDate"
-                           Margin="0,0,0,12" />
-                <TextBlock Text="{x:Bind ViewModel.SelectedManufacturer.LastModificationTime, Mode=OneWay}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

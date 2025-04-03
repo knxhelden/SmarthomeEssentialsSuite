@@ -19,18 +19,6 @@ namespace KnxHelden.SHES.Models.Observables
             set => SetProperty(entity.Id, value, entity, (u, n) => u.Id = n);
         }
 
-        public DateTime CreationTime
-        {
-            get => entity.CreationTime;
-            set => SetProperty(entity.CreationTime, value, entity, (u, n) => u.CreationTime = n);
-        }
-
-        public DateTime? LastModificationTime
-        {
-            get => entity.LastModificationTime;
-            set => SetProperty(entity.LastModificationTime, value, entity, (u, n) => u.LastModificationTime = n);
-        }
-
         public string Errors => string.Join(Environment.NewLine, from ValidationResult e in GetErrors(null) select e.ErrorMessage);
 
         #endregion

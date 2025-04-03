@@ -1,6 +1,9 @@
-﻿using KnxHelden.SHES.Services.Files;
+﻿using KnxHelden.SHES.Services.Devices;
+using KnxHelden.SHES.Services.Files;
 using KnxHelden.SHES.Shared.Helpers;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +21,8 @@ namespace KnxHelden.SHES.Services.Settings
 
         #region --- Constructor ---
 
-        public SettingServiceUnpackaged(IFileService fileService, IOptions<LocalSettingsOptions> options)
+        public SettingServiceUnpackaged(ResourceLoader resourceLoader, ILogger<DeviceService> logger, IFileService fileService, IOptions<LocalSettingsOptions> options)
+            : base(resourceLoader, logger)
         {
             _fileService = fileService;
             _options = options.Value;

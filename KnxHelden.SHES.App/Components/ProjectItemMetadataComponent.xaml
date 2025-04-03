@@ -21,14 +21,5 @@
                  AcceptsReturn="True"
                  Height="100"
                  Margin="0,0,0,16" />
-
-        <TextBlock x:Uid="StructureView_ProjectItemMetadata_CreationDate"
-                   Margin="0,0,0,12" />
-        <TextBlock Text="{x:Bind ViewModel.CurrentProjectItem.CreationTime, Mode=OneWay}"
-                   Margin="0,0,0,16" />
-
-        <TextBlock x:Uid="StructureView_ProjectItemMetadata_ModificationDate"
-                   Margin="0,0,0,12" />
-        <TextBlock Text="{x:Bind ViewModel.CurrentProjectItem.LastModificationTime, Mode=OneWay}" />
     </StackPanel>
 </UserControl>

@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using KnxHelden.SHES.Services.Devices;
+using Microsoft.Extensions.Logging;
+using Microsoft.Windows.ApplicationModel.Resources;
+using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 
@@ -6,6 +9,16 @@ namespace KnxHelden.SHES.Services.Files
 {
     public class FileService : ServiceBase, IFileService
     {
+        #region --- Constructor ---
+
+        public FileService(ResourceLoader resourceLoader, ILogger<DeviceService> logger)
+            : base(resourceLoader, logger)
+        {
+            
+        }
+
+        #endregion
+
         public T Read<T>(string folderPath, string fileName)
         {
             var path = Path.Combine(folderPath, fileName);

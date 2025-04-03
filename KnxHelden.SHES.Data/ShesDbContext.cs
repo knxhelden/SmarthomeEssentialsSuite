@@ -179,15 +179,11 @@ namespace KnxHelden.SHES.Data
                 new Manufacturer()
                 {
                     Id = new Guid("9a644771-78cf-4088-aa18-29575d0d643c"),
-                    CreationTime = new DateTime(638712000000000000),
-                    LastModificationTime = new DateTime(638712000000000000),
                     Name = "MDT"
                 },
                 new Manufacturer()
                 {
                     Id = new Guid("0cf31014-48d7-4d3e-8596-ba88e7a90213"),
-                    CreationTime = new DateTime(638712000000000000),
-                    LastModificationTime = new DateTime(638712000000000000),
                     Name = "Siemens"
                 });
         }

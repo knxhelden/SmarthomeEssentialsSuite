@@ -68,8 +68,6 @@ namespace KnxHelden.SHES.Services.ProjectItems
         {
             try
             {
-                observableProjectItem.LastModificationTime = DateTime.Now;
-
                 // Update new project
                 await this._projectItemRepository.UpdateAsync(observableProjectItem.entity);
                 return observableProjectItem;
