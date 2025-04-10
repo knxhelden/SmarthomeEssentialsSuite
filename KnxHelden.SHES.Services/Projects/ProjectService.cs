@@ -1,4 +1,5 @@
-﻿using KnxHelden.SHES.Data.Repositories.Projects;
+﻿using KnxHelden.SHES.Data.Repositories;
+using KnxHelden.SHES.Data.Repositories.Projects;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using KnxHelden.SHES.Services.Exceptions;
@@ -16,7 +17,7 @@ namespace KnxHelden.SHES.Services.Projects
     /// <summary>
     /// Service class for managing projects.
     /// </summary>
-    public class ProjectService : ServiceBase, IProjectService
+    public class ProjectService : EntityServiceBase<ObservableProject, Project>, IProjectService
     {
         private readonly IProjectRepository _projectRepository;
 
@@ -28,8 +29,8 @@ namespace KnxHelden.SHES.Services.Projects
         /// <param name="resourceLoader">The resource loader for localization.</param>
         /// <param name="logger">The logger for logging messages.</param>
         /// <param name="projectRepository">The project repository for data access.</param>
-        public ProjectService(ResourceLoader resourceLoader, ILogger<ProjectService> logger, IProjectRepository projectRepository)
-            : base(resourceLoader, logger)
+        public ProjectService(ResourceLoader resourceLoader, ILogger<ProjectService> logger, IRepository<Project> repository, IProjectRepository projectRepository)
+            : base(resourceLoader, logger, repository)
         {
             this._projectRepository = projectRepository;
         }

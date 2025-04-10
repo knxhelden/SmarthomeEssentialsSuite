@@ -4,10 +4,12 @@ using KnxHelden.SHES.App.Services.ThemeService;
 using KnxHelden.SHES.App.ViewModels;
 using KnxHelden.SHES.Controls.FormFieldService;
 using KnxHelden.SHES.Data;
+using KnxHelden.SHES.Data.Repositories;
 using KnxHelden.SHES.Data.Repositories.Devices;
 using KnxHelden.SHES.Data.Repositories.Manufacturers;
 using KnxHelden.SHES.Data.Repositories.ProjectItems;
 using KnxHelden.SHES.Data.Repositories.Projects;
+using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Services.Devices;
 using KnxHelden.SHES.Services.Knx;
 using KnxHelden.SHES.Services.Manufacturers;
@@ -21,6 +23,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.IO;
+using System.Linq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -84,6 +87,7 @@ namespace KnxHelden.SHES.App
             });
 
             // Repositories
+            RegisterGeneralRepositories(services);
             services.AddSingleton<IManufacturerRepository, ManufacturerRepository>();
             services.AddSingleton<IProjectRepository, ProjectRepository>();
             services.AddSingleton<IProjectItemRepository, ProjectItemRepository>();
@@ -119,6 +123,25 @@ namespace KnxHelden.SHES.App
             services.AddSingleton<IFormFieldService, FormFieldService>();
 
             return services.BuildServiceProvider();
+        }
+
+        private static void RegisterGeneralRepositories(ServiceCollection services)
+        {
+            var repositoryInterface = typeof(IRepository<>);
+
+            // Get all non-abstract types that inherit from EntityBase.
+            var types = typeof(EntityBase).Assembly
+                .GetTypes()
+                .Where(t => t.IsSubclassOf(typeof(EntityBase)) && !t.IsAbstract)
+                .ToList();
+
+            // Register each repository type for the corresponding entity type.
+            foreach (var type in types)
+            {
+                var repositoryType = typeof(IRepository<>).MakeGenericType(type);
+                var concreteType = typeof(Repository<>).MakeGenericType(type);
+                services.AddSingleton(repositoryType, concreteType);
+            }
         }
     }
 }
