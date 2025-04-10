@@ -37,31 +37,6 @@ namespace KnxHelden.SHES.Services.Projects
 
         #endregion
 
-        public async Task<ObservableProject> GetByIdAsync(Guid id)
-        {
-            try
-            {
-                return new ObservableProject(await this._projectRepository.GetByIdAsync(id));
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public async Task<ObservableCollection<ObservableProject>> GetAllAsync()
-        {
-            try
-            {
-                var projects = await this._projectRepository.GetAllAsync();
-                return new ObservableCollection<ObservableProject>(projects.Select(p => new ObservableProject(p)));
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public async Task<bool> CreateAsync(ObservableProject observableProject)
         {
             if (string.IsNullOrWhiteSpace(observableProject.Name))
@@ -97,34 +72,6 @@ namespace KnxHelden.SHES.Services.Projects
             {
                 return false;
             }
-        }
-
-        public async Task<bool> UpdateAsync(ObservableProject observableProject)
-        {
-            try
-            {
-                // Update new project
-                await this._projectRepository.UpdateAsync(observableProject.entity);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> DeleteAsync(ObservableProject observableProject)
-        {
-            try
-            {
-                await this._projectRepository.DeleteAsync(observableProject.entity);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public async Task<bool> ExistsAsync(string name)
