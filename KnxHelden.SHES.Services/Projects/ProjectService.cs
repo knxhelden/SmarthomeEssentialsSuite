@@ -37,7 +37,14 @@ namespace KnxHelden.SHES.Services.Projects
 
         #endregion
 
-        public async Task<bool> CreateAsync(ObservableProject observableProject)
+        /// <summary>
+        /// Creates a new project entity with additional validation and initialization.
+        /// </summary>
+        /// <param name="observableProject">The observable project model containing the project data.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation. The result indicates success (<c>true</c>) or failure (<c>false</c>).
+        /// </returns>
+        public new async Task<bool> CreateAsync(ObservableProject observableProject)
         {
             if (string.IsNullOrWhiteSpace(observableProject.Name))
             {
@@ -74,6 +81,11 @@ namespace KnxHelden.SHES.Services.Projects
             }
         }
 
+        /// <summary>
+        /// Checks if a project with the specified name exists.
+        /// </summary>
+        /// <param name="name">The name of the project.</param>
+        /// <returns>True if the project exists; otherwise, false.</returns>
         public async Task<bool> ExistsAsync(string name)
         {
             return await this._projectRepository.ExistsAsync(name);
