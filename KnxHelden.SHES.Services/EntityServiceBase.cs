@@ -55,8 +55,9 @@ namespace KnxHelden.SHES.Services
                 var entity = await this._repository.GetByIdAsync(id);
                 return (TObservable)Activator.CreateInstance(typeof(TObservable), entity);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to load entity in GetByIdAsync.");
                 return null;
             }
         }
@@ -68,39 +69,98 @@ namespace KnxHelden.SHES.Services
         /// A task representing the asynchronous operation.
         /// The result is a collection of all observable entities.
         /// </returns>
-        public Task<ObservableCollection<TObservable>> GetAllAsync()
+        public async Task<ObservableCollection<TObservable>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entities = await _repository.GetAllAsync();
+                var observables = new ObservableCollection<TObservable>();
+
+                foreach (var entity in entities)
+                {
+                    var observable = (TObservable)Activator.CreateInstance(typeof(TObservable), entity);
+                    observables.Add(observable);
+                }
+
+                return observables;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to load entities in GetAllAsync.");
+                return new ObservableCollection<TObservable>();
+            }
         }
 
         /// <summary>
         /// Creates a new entity based on the given observable model.
         /// </summary>
-        /// <param name="observableProject">The observable model to create.</param>
+        /// <param name="observable">The observable model to create.</param>
         /// <returns>A task representing the asynchronous operation. The result indicates success or failure.</returns>
-        public Task<bool> CreateAsync(TObservable observableProject)
+        public async Task<bool> CreateAsync(TObservable observable)
         {
-            throw new NotImplementedException();
+            if (observable == null)
+            {
+                throw new ArgumentNullException(nameof(observable));
+            }
+
+            try
+            {
+                await _repository.CreateAsync(observable.entity);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to create entity in CreateAsync.");
+                return false;
+            }
         }
 
         /// <summary>
         /// Updates an existing entity based on the given observable model.
         /// </summary>
-        /// <param name="observableProject">The observable model with updated data.</param>
+        /// <param name="observable">The observable model with updated data.</param>
         /// <returns>A task representing the asynchronous operation. The result indicates success or failure.</returns>
-        public Task<bool> UpdateAsync(TObservable observableProject)
+        public async Task<bool> UpdateAsync(TObservable observable)
         {
-            throw new NotImplementedException();
+            if (observable == null)
+            {
+                throw new ArgumentNullException(nameof(observable));
+            }
+
+            try
+            {
+                await _repository.UpdateAsync(observable.entity);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update entity in UpdateAsync.");
+                return false;
+            }
         }
 
         /// <summary>
         /// Deletes an existing entity based on the given observable model.
         /// </summary>
-        /// <param name="observableProject">The observable model to delete.</param>
+        /// <param name="observable">The observable model to delete.</param>
         /// <returns>A task representing the asynchronous operation. The result indicates success or failure.</returns>
-        public Task<bool> DeleteAsync(TObservable observableProject)
+        public async Task<bool> DeleteAsync(TObservable observable)
         {
-            throw new NotImplementedException();
+            if (observable == null)
+            {
+                throw new ArgumentNullException(nameof(observable));
+            }
+
+            try
+            {
+                await _repository.DeleteAsync(observable.entity);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to delete entity in DeleteAsync.");
+                return false;
+            }
         }
     }
 }
