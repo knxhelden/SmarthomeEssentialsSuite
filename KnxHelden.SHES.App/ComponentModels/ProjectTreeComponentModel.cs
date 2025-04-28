@@ -150,7 +150,7 @@ namespace KnxHelden.SHES.App.ComponentModels
             item.Name = this.NewProjectItemName;
 
             // Insert new project item
-            await this._projectItemService.AddAsync(item);
+            await this._projectItemService.CreateAsync(item);
 
             // Loads the item again from the database to ensure that all properties are filled correctly
             item = await this._projectItemService.GetByIdAsync(item.Id);
