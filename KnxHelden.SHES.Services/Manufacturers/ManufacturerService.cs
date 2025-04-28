@@ -1,17 +1,14 @@
-﻿using KnxHelden.SHES.Data.Repositories.Manufacturers;
+﻿using KnxHelden.SHES.Data.Repositories;
+using KnxHelden.SHES.Data.Repositories.Manufacturers;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using KnxHelden.SHES.Services.Devices;
 using Microsoft.Extensions.Logging;
 using Microsoft.Windows.ApplicationModel.Resources;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KnxHelden.SHES.Services.Manufacturers
 {
-    public class ManufacturerService : ServiceBase, IManufacturerService
+    public class ManufacturerService : EntityServiceBase<ObservableManufacturer, Manufacturer>, IManufacturerService
     {
         private readonly IManufacturerRepository _manufacturerRepository;
 
@@ -20,31 +17,12 @@ namespace KnxHelden.SHES.Services.Manufacturers
         /// <summary>Initializes a new instance of the <see cref="ManufacturerService" /> class.</summary>
         /// <param name="logger">The logger.</param>
         /// <param name="deviceRepository">The manufacturer repository.</param>
-        public ManufacturerService(ResourceLoader resourceLoader, ILogger<DeviceService> logger, IManufacturerRepository manufacturerRepository)
-            : base(resourceLoader, logger)
+        public ManufacturerService(ResourceLoader resourceLoader, ILogger<DeviceService> logger, IRepository<Manufacturer> repository, IManufacturerRepository manufacturerRepository)
+            : base(resourceLoader, logger, repository)
         {
             _manufacturerRepository = manufacturerRepository;
         }
 
         #endregion
-
-        public async Task<List<ObservableManufacturer>> GetAllAsync()
-        {
-            try
-            {
-                var manufacturers = await this._manufacturerRepository.GetAllAsync();
-
-                return manufacturers.Select(m => new ObservableManufacturer(m)).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public async Task UpdateAsync(ObservableManufacturer observableManufacturer)
-        {
-            await this._manufacturerRepository.UpdateAsync(observableManufacturer.entity as Manufacturer);
-        }
     }
 }
