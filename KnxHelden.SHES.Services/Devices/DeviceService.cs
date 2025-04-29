@@ -1,4 +1,5 @@
-﻿using KnxHelden.SHES.Data.Repositories.Devices;
+﻿using KnxHelden.SHES.Data.Repositories;
+using KnxHelden.SHES.Data.Repositories.Devices;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using Microsoft.Extensions.Logging;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace KnxHelden.SHES.Services.Devices
 {
-    public class DeviceService : ServiceBase, IDeviceService
+    public class DeviceService : EntityServiceBase<ObservableDevice, Device>, IDeviceService
     {
         private readonly IDeviceRepository _deviceRepository;
 
@@ -20,8 +21,8 @@ namespace KnxHelden.SHES.Services.Devices
         /// <summary>Initializes a new instance of the <see cref="DeviceService" /> class.</summary>
         /// <param name="logger">The logger.</param>
         /// <param name="deviceRepository">The device repository.</param>
-        public DeviceService(ResourceLoader resourceLoader, ILogger<DeviceService> logger, IDeviceRepository deviceRepository)
-            : base(resourceLoader, logger)
+        public DeviceService(ResourceLoader resourceLoader, ILogger<DeviceService> logger, IRepository<Device> repository, IDeviceRepository deviceRepository)
+            : base(resourceLoader, logger, repository)
         {
             this._deviceRepository = deviceRepository;
         }
@@ -29,20 +30,6 @@ namespace KnxHelden.SHES.Services.Devices
         #endregion
 
         #region --- IDeviceService ---
-
-        public async Task<ObservableDevice> GetDeviceAsync(Guid id)
-        {
-            try
-            {
-                var device = await this._deviceRepository.GetByIdAsync(id);
-
-                return new ObservableDevice(device);
-            }
-            catch
-            {
-                return null;
-            }
-        }
 
         /// <summary>Gets the devices for location asynchronous.</summary>
         /// <param name="observableProjectItem">The observable project item.</param>

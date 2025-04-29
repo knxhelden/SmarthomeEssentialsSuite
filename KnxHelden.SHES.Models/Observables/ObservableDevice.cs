@@ -8,8 +8,17 @@ using System.Linq;
 
 namespace KnxHelden.SHES.Models.Observables
 {
-    public class ObservableDevice : ObservableProjectItem
+    public class ObservableDevice : ObservableBase<Device>
     {
+        private readonly ObservableProjectItem _projectItem;
+
+        #region --- Properties ---
+
+        public ObservableProjectItem ProjectItem
+        {
+            get => _projectItem;
+        }
+
         public string Identifier
         {
             get => ((Device)entity).Identifier;
@@ -85,7 +94,7 @@ namespace KnxHelden.SHES.Models.Observables
 
         public string Location
         {
-            get => this.Parent.Name;
+            get => ProjectItem.Parent.Name;
         }
 
         public List<DeviceType> DeviceTypes
@@ -105,6 +114,8 @@ namespace KnxHelden.SHES.Models.Observables
             }
         }
 
+        #endregion
+
         #region --- Constructors ---
 
         public ObservableDevice()
@@ -113,7 +124,9 @@ namespace KnxHelden.SHES.Models.Observables
 
         public ObservableDevice(Device device)
             : base(device)
-        { }
+        {
+            _projectItem = new ObservableProjectItem(device);
+        }
 
         #endregion
     }

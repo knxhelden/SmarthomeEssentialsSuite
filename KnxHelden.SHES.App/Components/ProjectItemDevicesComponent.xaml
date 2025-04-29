@@ -38,8 +38,8 @@
                             </Grid.ColumnDefinitions>
 
                             <FontIcon FontFamily="{StaticResource SmarthomeIcons}" Glyph="{Binding TypeIcon}" HorizontalAlignment="Left" />
-                            <TextBlock Grid.Column="1" Text="{x:Bind Parent.Name}" />
-                            <TextBlock Grid.Column="2" Text="{x:Bind Name}" />
+                            <TextBlock Grid.Column="1" Text="{x:Bind ProjectItem.Parent.Name}" />
+                            <TextBlock Grid.Column="2" Text="{x:Bind ProjectItem.Name}" />
                             <TextBlock Grid.Column="3" Text="{x:Bind Type}" />
                         </Grid>
                     </DataTemplate>
