@@ -118,7 +118,7 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         public async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            var projectItems = await this._projectItemService.GetProjectItemsAsync(this.CurrentProject, true);
+            var projectItems = await this._projectItemService.GetItemsForProjectAsync(this.CurrentProject, true);
             this.ProjectItems.AddRange(projectItems);
             this.SelectedProjectItem = projectItems.FirstOrDefault();
             this.IsTreeLoading = false;
