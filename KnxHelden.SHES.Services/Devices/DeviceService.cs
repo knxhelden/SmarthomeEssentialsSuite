@@ -4,9 +4,7 @@ using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Observables;
 using Microsoft.Extensions.Logging;
 using Microsoft.Windows.ApplicationModel.Resources;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,11 +44,6 @@ namespace KnxHelden.SHES.Services.Devices
             {
                 return null;
             }
-        }
-
-        public async Task UpdateAsync(ObservableDevice observableDevice)
-        {
-            await this._deviceRepository.UpdateAsync(observableDevice.entity as Device);
         }
 
         #endregion

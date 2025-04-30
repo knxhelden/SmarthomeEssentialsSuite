@@ -3,6 +3,7 @@ using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Shared.Extensions;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace KnxHelden.SHES.Models.Observables
@@ -11,6 +12,7 @@ namespace KnxHelden.SHES.Models.Observables
     {
         #region --- Properties ---
 
+        [Required]
         public string Name
         {
             get => entity.Name;

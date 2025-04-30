@@ -1,9 +1,11 @@
 ﻿using KnxHelden.SHES.Models.Attributes;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
+using KnxHelden.SHES.Models.Validations;
 using KnxHelden.SHES.Shared.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace KnxHelden.SHES.Models.Observables
@@ -19,6 +21,7 @@ namespace KnxHelden.SHES.Models.Observables
             get => _projectItem;
         }
 
+        [Required]
         public string Identifier
         {
             get => ((Device)entity).Identifier;
@@ -47,11 +50,15 @@ namespace KnxHelden.SHES.Models.Observables
             }
         }
 
+        [KnxPhysicalAddress(ErrorMessage = "Ungültige KNX-Adresse.")]
         public string PhysicalAddress
         {
             get => string.Format("{0}.{1}.{2}", ((Device)entity).KnxTopologyArea, ((Device)entity).KnxTopologyLine, ((Device)entity).KnxTopologyAddress);
             set
             {
+                // Must be explicitly validated here, since there is no 1-to-1 mapping with a property
+                this.ValidateProperty(value, nameof(PhysicalAddress));
+
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     var parts = value.Split('.');
@@ -68,7 +75,6 @@ namespace KnxHelden.SHES.Models.Observables
                     }
                 }
             }
-
         }
 
         public bool IsRailMounted

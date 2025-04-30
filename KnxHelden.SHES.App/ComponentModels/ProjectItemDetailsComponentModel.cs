@@ -75,7 +75,10 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         private async void OnDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            await this._deviceService.UpdateAsync(this.CurrentDevice);
+            if (!CurrentDevice.HasErrors)
+            {
+                await this._deviceService.UpdateAsync(this.CurrentDevice);
+            }
         }
 
         #endregion
@@ -90,7 +93,7 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             // General device fields
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"),
-    _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier))));
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DeviceType"),
                 _formFieldService.GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type))));
@@ -105,7 +108,7 @@ namespace KnxHelden.SHES.App.ComponentModels
                 _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.OrderNumber))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_PhysicalKnxAddress"),
-                new TextBox()));
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.PhysicalAddress))));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_RailMount"),
                 _formFieldService.GetCheckBox(CurrentDevice, nameof(CurrentDevice.IsRailMounted))));
