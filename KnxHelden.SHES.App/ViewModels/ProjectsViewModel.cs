@@ -148,7 +148,10 @@ namespace KnxHelden.SHES.App.ViewModels
 
         public async void InputField_LostFocus(object sender, object e)
         {
-            await _projectService.UpdateAsync(SelectedProject);
+            if (!SelectedProject.HasErrors)
+            {
+                await _projectService.UpdateAsync(SelectedProject);
+            }
         }
 
         #endregion

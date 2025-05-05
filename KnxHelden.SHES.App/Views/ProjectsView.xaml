@@ -131,20 +131,20 @@
                          LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
                          Margin="0,0,0,16" />-->
                     <TextBox x:Uid="ProjectView_Project_Name"
-                                IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                                Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                                Margin="0,0,0,16" />
+                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                             Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}" />
                     <validation:ValidationFor PropertyName="SelectedProject.Name" />
                     <TextBox x:Uid="ProjectView_Project_Number"
-                         IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                         Text="{x:Bind ViewModel.SelectedProject.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                         Margin="0,0,0,24" />
+                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                             Text="{x:Bind ViewModel.SelectedProject.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                             Margin="0,16,0,0"/>
+                    <validation:ValidationFor PropertyName="SelectedProject.Number" />
 
                     <TextBlock x:Uid="ProjectView_Project_BuildingOwner"
                            Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,0,0,24" />
+                           Margin="0,24,0,24" />
                     <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
