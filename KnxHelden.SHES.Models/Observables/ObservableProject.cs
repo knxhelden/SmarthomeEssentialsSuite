@@ -1,5 +1,7 @@
-﻿using KnxHelden.SHES.Models.Entities;
+﻿using KnxHelden.SHES.Models.Attributes;
+using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
+using KnxHelden.SHES.Models.Strings;
 using System.ComponentModel.DataAnnotations;
 
 namespace KnxHelden.SHES.Models.Observables
@@ -8,14 +10,16 @@ namespace KnxHelden.SHES.Models.Observables
     {
         #region --- Properties ---
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
+        [StringLength(40, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
         public string Name
         {
             get => entity.Name;
             set => SetProperty(entity.Name, value, entity, (u, n) => u.Name = n, true);
         }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
+        [StringLength(15, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
         public string Number
         {
             get => entity.Number;

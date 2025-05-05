@@ -121,25 +121,22 @@
                       Padding="16">
             <validation:Form Model="{x:Bind ViewModel}">
             <StackPanel>
-                
+
                     <TextBlock x:Uid="ProjectView_Project_Details"
                            Style="{StaticResource SubtitleTextBlockStyle}"
                            Margin="0,0,0,24" />
-                    <!--<TextBox x:Uid="ProjectView_Project_Name"
-                         IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                         Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                         Margin="0,0,0,16" />-->
                     <TextBox x:Uid="ProjectView_Project_Name"
                              IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}" />
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                             MaxLength="40" />
                     <validation:ValidationFor PropertyName="SelectedProject.Name" />
                     <TextBox x:Uid="ProjectView_Project_Number"
                              IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                             Margin="0,16,0,0"/>
+                             MaxLength="15"
+                             Margin="0,16,0,0" />
                     <validation:ValidationFor PropertyName="SelectedProject.Number" />
 
                     <TextBlock x:Uid="ProjectView_Project_BuildingOwner"

@@ -17,5 +17,21 @@
   <ItemGroup>
     <ProjectReference Include="..\KnxHelden.SHES.Shared\KnxHelden.SHES.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Strings\ValidationMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Strings\ValidationMessages.de.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Strings\ValidationMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   
 </Project>
