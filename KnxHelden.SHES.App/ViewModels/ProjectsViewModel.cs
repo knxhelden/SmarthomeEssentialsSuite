@@ -13,6 +13,7 @@ using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,20 +39,35 @@ namespace KnxHelden.SHES.App.ViewModels
             set => SetProperty(ref newProject, value);
         }
 
-        private ObservableProject selectedProject;
+        private ObservableProject _selectedProject;
         public ObservableProject SelectedProject
         {
-            get => selectedProject;
+            get => _selectedProject;
             set
             {
-                SetProperty(ref selectedProject, value);
-                OnPropertyChanged(nameof(IsProjectSelected));
-                OpenProjectCommand.NotifyCanExecuteChanged();
-                DeleteProjectCommand.NotifyCanExecuteChanged();
+                if (_selectedProject != value)
+                {
+                    if (_selectedProject != null)
+                    {
+                        // Remove the old event handler to prevent memory leaks and duplicate event calls
+                        _selectedProject.PropertyChanged -= OnProjectPropertyChanged;
+                    }
+
+                    SetProperty(ref _selectedProject, value);
+                    OnPropertyChanged(nameof(IsProjectSelected));
+                    OpenProjectCommand.NotifyCanExecuteChanged();
+                    DeleteProjectCommand.NotifyCanExecuteChanged();
+
+                    // Add the event handler to listen for changes in the new device
+                    _selectedProject.PropertyChanged += OnProjectPropertyChanged;
+                }
+
+
+                
             }
         }
 
-        public bool IsProjectSelected => selectedProject != null;
+        public bool IsProjectSelected => _selectedProject != null;
 
         public IAsyncRelayCommand OpenAddProjectDialogCommand { get; }
         public IAsyncRelayCommand AddProjectCommand { get; }
@@ -146,7 +162,7 @@ namespace KnxHelden.SHES.App.ViewModels
             ProjectList.AddRange(await _projectService.GetAllAsync());
         }
 
-        public async void InputField_LostFocus(object sender, object e)
+        public async void OnProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (!SelectedProject.HasErrors)
             {
@@ -192,13 +208,13 @@ namespace KnxHelden.SHES.App.ViewModels
 
         private bool CanDeleteProject()
         {
-            return selectedProject != null;
+            return SelectedProject != null;
         }
 
         private async Task DeleteProject()
         {
-            await _projectService.DeleteAsync(selectedProject);
-            ProjectList.Remove(selectedProject);
+            await _projectService.DeleteAsync(SelectedProject);
+            ProjectList.Remove(SelectedProject);
             WeakReferenceMessenger.Default.Send(new CurrentProjectSenderMessage(null));
 
             WeakReferenceMessenger.Default.Send(new AppBarSenderMessage(new AppInfoBarViewModel
