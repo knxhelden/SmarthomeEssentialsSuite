@@ -1,5 +1,4 @@
-﻿using KnxHelden.SHES.Models.Attributes;
-using KnxHelden.SHES.Models.Entities;
+﻿using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
 using KnxHelden.SHES.Models.Strings;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +10,7 @@ namespace KnxHelden.SHES.Models.Observables
         #region --- Properties ---
 
         [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
-        [StringLength(40, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
+        [StringLength(50, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
         public string Name
         {
             get => entity.Name;
@@ -19,7 +18,7 @@ namespace KnxHelden.SHES.Models.Observables
         }
 
         [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
-        [StringLength(15, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
+        [StringLength(12, MinimumLength = 3, ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.StringLength))]
         public string Number
         {
             get => entity.Number;
@@ -38,12 +37,14 @@ namespace KnxHelden.SHES.Models.Observables
             set => SetProperty(entity.ClientSurname, value, entity, (u, n) => u.ClientSurname = n);
         }
 
+        [RegularExpression(@"^(?:$|\+?[1-9]\d{1,14})$", ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Phone))]
         public string ClientPhone
         {
             get => entity.ClientPhone;
             set => SetProperty(entity.ClientPhone, value, entity, (u, n) => u.ClientPhone = n);
         }
 
+        [RegularExpression(@"^$|^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailAddress))]
         public string ClientEmail
         {
             get => entity.ClientEmail;

@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Die E-Mail-Adresse ist nicht valide.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Die Telefonnummer ist nicht valide.</value>
+  </data>
   <data name="Required" xml:space="preserve">
-    <value>Das Feld '{0}' ist erforderlich.</value>
+    <value>Das Feld ist erforderlich.</value>
   </data>
   <data name="StringLength" xml:space="preserve">
-    <value>'{0}' muss mindestens {2} und darf maximal {1} Zeichen lang sein.</value>
+    <value>Das Feld muss mindestens {2} und darf maximal {1} Zeichen lang sein.</value>
   </data>
 </root>

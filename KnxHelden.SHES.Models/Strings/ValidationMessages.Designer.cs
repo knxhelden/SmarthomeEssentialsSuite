@@ -61,7 +61,25 @@ namespace KnxHelden.SHES.Models.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;{0}&apos; field is required..
+        ///   Looks up a localized string similar to The email address is not valid..
+        /// </summary>
+        internal static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The phone number is not valid..
+        /// </summary>
+        internal static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field is required..
         /// </summary>
         internal static string Required {
             get {
@@ -70,7 +88,7 @@ namespace KnxHelden.SHES.Models.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; must be at least {2} and no more than {1} characters long..
+        ///   Looks up a localized string similar to This field must be at least {2} and no more than {1} characters long..
         /// </summary>
         internal static string StringLength {
             get {

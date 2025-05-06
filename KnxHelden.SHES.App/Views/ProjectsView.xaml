@@ -123,76 +123,87 @@
             <StackPanel>
 
                     <TextBlock x:Uid="ProjectView_Project_Details"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,0,0,24" />
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Margin="0,0,0,24" />
                     <TextBox x:Uid="ProjectView_Project_Name"
                              IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                             MaxLength="40" />
-                    <validation:ValidationFor PropertyName="SelectedProject.Name" />
+                             MaxLength="50" />
+                    <validation:ValidationFor PropertyName="SelectedProject.Name" Margin="0,5,0,0" />
                     <TextBox x:Uid="ProjectView_Project_Number"
                              IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                             MaxLength="15"
+                             MaxLength="12"
                              Margin="0,16,0,0" />
-                    <validation:ValidationFor PropertyName="SelectedProject.Number" />
+                    <validation:ValidationFor PropertyName="SelectedProject.Number" Margin="0,5,0,0" />
 
                     <TextBlock x:Uid="ProjectView_Project_BuildingOwner"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,24,0,24" />
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Margin="0,24,0,24" />
                     <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Uid="ProjectView_Project_FirstName"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                             Text="{x:Bind ViewModel.SelectedProject.ClientFirstName, Mode=TwoWay}"
-                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                             Margin="0,0,24,0" />
+                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                                 Text="{x:Bind ViewModel.SelectedProject.ClientFirstName, Mode=TwoWay}"
+                                 LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                                 MaxLength="50"
+                                 Margin="0,0,24,0" />
+                        <validation:ValidationFor PropertyName="SelectedProject.ClientFirstName" Margin="0,5,0,0" />
                         <TextBox x:Uid="ProjectView_Project_LastName"
-                             Grid.Column="1"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                             Text="{x:Bind ViewModel.SelectedProject.ClientSurname, Mode=TwoWay}"
-                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"/>
+                                 Grid.Column="1"
+                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                                 Text="{x:Bind ViewModel.SelectedProject.ClientSurname, Mode=TwoWay}"
+                                 LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                                 MaxLength="50" />
+                        <validation:ValidationFor PropertyName="SelectedProject.ClientSurname" Margin="0,5,0,0" />
                     </Grid>
 
                     <TextBox x:Uid="ProjectView_Project_Phone"
-                         IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                         Text="{x:Bind ViewModel.SelectedProject.ClientPhone, Mode=TwoWay}"
-                         LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                         Margin="0,0,0,16" />
+                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                             Text="{x:Bind ViewModel.SelectedProject.ClientPhone, Mode=TwoWay}"
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                             MaxLength="15" />
+                    <validation:ValidationFor PropertyName="SelectedProject.ClientPhone" Margin="0,5,0,0" />
                     <TextBox x:Uid="ProjectView_Project_Email"
-                         IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                         Text="{x:Bind ViewModel.SelectedProject.ClientEmail, Mode=TwoWay}"
-                         LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                         Margin="0,0,0,24" />
+                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                             Text="{x:Bind ViewModel.SelectedProject.ClientEmail, Mode=TwoWay}"
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                             Margin="0,16,0,0" />
+                    <validation:ValidationFor PropertyName="SelectedProject.ClientEmail" Margin="0,5,0,0" />
 
                     <TextBlock x:Uid="ProjectView_Project_ConstructionSite"
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           Margin="0,0,0,24" />
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               Margin="0,24,0,24" />
                     <TextBox x:Uid="ProjectView_Project_Street"
-                         IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                         Text="{x:Bind ViewModel.SelectedProject.ConstructionStreet, Mode=TwoWay}"
-                         LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                         Margin="0,0,0,16" />
-                    <Grid Margin="0,0,0,16">
+                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                             Text="{x:Bind ViewModel.SelectedProject.ConstructionStreet, Mode=TwoWay}"
+                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                             MaxLength="50" />
+                    <validation:ValidationFor PropertyName="SelectedProject.ConstructionStreet" Margin="0,5,0,0" />
+                    <Grid Margin="0,16,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Uid="ProjectView_Project_Zip"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                             Text="{x:Bind ViewModel.SelectedProject.ConstructionPostalCode, Mode=TwoWay}"
-                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
-                             Margin="0,0,24,0" />
+                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                                 Text="{x:Bind ViewModel.SelectedProject.ConstructionPostalCode, Mode=TwoWay}"
+                                 LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                                 MaxLength="8"
+                                 Margin="0,0,24,0" />
+                        <validation:ValidationFor PropertyName="SelectedProject.ConstructionPostalCode" Margin="0,5,0,0" />
                         <TextBox x:Uid="ProjectView_Project_City"
-                             Grid.Column="1"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                             Text="{x:Bind ViewModel.SelectedProject.ConstructionCity, Mode=TwoWay}"
-                             LostFocus="{x:Bind ViewModel.InputField_LostFocus}"/>
+                                 Grid.Column="1"
+                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
+                                 Text="{x:Bind ViewModel.SelectedProject.ConstructionCity, Mode=TwoWay}"
+                                 LostFocus="{x:Bind ViewModel.InputField_LostFocus}"
+                                 MaxLength="50" />
+                        <validation:ValidationFor PropertyName="SelectedProject.ConstructionCity" Margin="0,5,0,0" />
                     </Grid>
             </StackPanel>
             </validation:Form>
