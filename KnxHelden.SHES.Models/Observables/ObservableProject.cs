@@ -44,7 +44,6 @@ namespace KnxHelden.SHES.Models.Observables
             set => SetProperty(entity.ClientPhone, value, entity, (u, n) => u.ClientPhone = n);
         }
 
-        [RegularExpression(@"^$|^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailAddress))]
         public string ClientEmail
         {
             get => entity.ClientEmail;

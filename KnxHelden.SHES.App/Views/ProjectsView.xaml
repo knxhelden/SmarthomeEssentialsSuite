@@ -86,7 +86,7 @@
 
                             <FontIcon Grid.RowSpan="2" FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF07D2;" Foreground="DimGray" FontSize="30" />
                             <TextBlock Grid.Column="1"
-                                       Text="{x:Bind Name}"
+                                       Text="{x:Bind Name, Mode=OneWay}"
                                        Style="{ThemeResource BaseTextBlockStyle}"
                                        FontWeight="Bold"
                                        Margin="12,6,0,0" />
@@ -94,12 +94,12 @@
                                 <TextBlock Text="Projektnr.:"
                                            Style="{ThemeResource BodyTextBlockStyle}"
                                            Margin="12,0,0,6" />
-                                <TextBlock Text="{x:Bind Number}"
+                                <TextBlock Text="{x:Bind Number, Mode=OneWay}"
                                            Style="{ThemeResource BodyTextBlockStyle}"
                                            Margin="6,0,0,6" />
                             </StackPanel>
                             <Border Grid.Column="2" Grid.RowSpan="2" Background="Gray" CornerRadius="8" Padding="4,4,4,2" Margin="12,12,0,12">
-                                <TextBlock Text="{x:Bind State}" Foreground="White" FontSize="12" />
+                                <TextBlock Text="{x:Bind State, Mode=OneWay}" Foreground="White" FontSize="12" />
                             </Border>
                         </Grid>
                         
