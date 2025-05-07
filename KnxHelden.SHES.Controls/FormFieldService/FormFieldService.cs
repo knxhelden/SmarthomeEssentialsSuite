@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
+using WinUIValidation;
 
 namespace KnxHelden.SHES.Controls.FormFieldService
 {
@@ -162,6 +163,17 @@ namespace KnxHelden.SHES.Controls.FormFieldService
             });
 
             return comboBox;
+        }
+
+        public ValidationFor GetValidation(string propertyName)
+        {
+            var validation = new ValidationFor
+            {
+                PropertyName = propertyName,
+                Margin = new Thickness(0,5,0,0)
+            };
+
+            return validation;
         }
     }
 }

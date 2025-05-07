@@ -6,25 +6,39 @@
     xmlns:local="using:KnxHelden.SHES.App.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:KnxHelden.SHES.Controls"
+    xmlns:controls="using:KnxHelden.SHES.Controls.FormFieldService"
+    xmlns:validation="using:WinUIValidation"
     mc:Ignorable="d">
 
-    <GridView ItemsSource="{x:Bind ViewModel.FormFields}" SelectionMode="None">
-        <GridView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
-            </ItemsPanelTemplate>
-        </GridView.ItemsPanel>
+    <validation:Form Model="{x:Bind ViewModel}">
+        <GridView ItemsSource="{x:Bind ViewModel.FormFields}" SelectionMode="None">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
 
-        <GridView.ItemTemplate>
-            <DataTemplate x:DataType="controls:FormField">
-                <Grid ColumnDefinitions="150,250" MinHeight="50" Margin="5">
-                    <TextBlock Text="{x:Bind Label}" FontWeight="Bold" VerticalAlignment="Center" />
-                    <ContentPresenter Grid.Column="1"
-                              VerticalAlignment="Center"
-                              Content="{x:Bind Control}" />
-                </Grid>
-            </DataTemplate>
-        </GridView.ItemTemplate>
-    </GridView>
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="controls:FormField">
+                    <Grid MinHeight="50" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="250" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{x:Bind Label}" FontWeight="Bold" VerticalAlignment="Center" />
+                        <ContentPresenter Grid.Column="1"
+                                  VerticalAlignment="Center"
+                                  Content="{x:Bind Control}" />
+                        <validation:ValidationFor Grid.Column="1"
+                                                  Grid.Row="1"
+                                                  PropertyName="{x:Bind PropertyName}" Margin="0,5,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </validation:Form>
 </UserControl>

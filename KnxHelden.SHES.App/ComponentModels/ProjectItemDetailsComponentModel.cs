@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using KnxHelden.SHES.App.Messages;
-using KnxHelden.SHES.Controls;
 using KnxHelden.SHES.Controls.FormFieldService;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
@@ -93,7 +92,8 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             // General device fields
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"),
-                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier))));
+                _formFieldService.GetTextBox(CurrentDevice, nameof(CurrentDevice.Identifier)),
+                "CurrentDevice.Identifier"));
 
             FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DeviceType"),
                 _formFieldService.GetEnumComboBox<DeviceType>(CurrentDevice, nameof(CurrentDevice.Type))));

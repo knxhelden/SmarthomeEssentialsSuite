@@ -1,6 +1,7 @@
 ﻿using KnxHelden.SHES.Models.Attributes;
 using KnxHelden.SHES.Models.Entities;
 using KnxHelden.SHES.Models.Enumerations;
+using KnxHelden.SHES.Models.Strings;
 using KnxHelden.SHES.Models.Validations;
 using KnxHelden.SHES.Shared.Extensions;
 using System;
@@ -21,7 +22,7 @@ namespace KnxHelden.SHES.Models.Observables
             get => _projectItem;
         }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
         public string Identifier
         {
             get => ((Device)entity).Identifier;
