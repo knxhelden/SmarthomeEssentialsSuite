@@ -41,10 +41,10 @@ namespace KnxHelden.SHES.Models.Observables
 
         private void ObservableBase_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(HasErrors))
-            {
-                OnPropertyChanged(nameof(HasErrors));
-            }
+            //if (e.PropertyName != nameof(HasErrors))
+            //{
+            //    OnPropertyChanged(nameof(HasErrors));
+            //}
         }
 
         private void ObservableBase_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)

@@ -25,7 +25,7 @@ namespace KnxHelden.SHES.Services.Settings
 
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue(key, out obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await JsonHelper.ToObjectAsync<T>((string)obj);
             }
 
             return default;
@@ -33,7 +33,7 @@ namespace KnxHelden.SHES.Services.Settings
 
         public async Task SaveSettingAsync<T>(string key, T value)
         {
-            ApplicationData.Current.LocalSettings.Values[key] = await Json.StringifyAsync(value);
+            ApplicationData.Current.LocalSettings.Values[key] = await JsonHelper.StringifyAsync(value);
         }
     }
 }

@@ -73,6 +73,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KnxHelden.SHES.Controls\KnxHelden.SHES.Controls.csproj" />
     <ProjectReference Include="..\KnxHelden.SHES.Services\KnxHelden.SHES.Services.csproj" />
+    <ProjectReference Include="..\KnxHelden.SHES.Shared\KnxHelden.SHES.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\Fonts\materialdesignicons-webfont.ttf">

@@ -26,7 +26,7 @@ namespace KnxHelden.SHES.Models.Observables
         public string Identifier
         {
             get => ((Device)entity).Identifier;
-            set => SetProperty(((Device)entity).Identifier, value, (Device)entity, (u, n) => u.Identifier = n);
+            set => SetProperty(((Device)entity).Identifier, value, (Device)entity, (u, n) => u.Identifier = n, true);
         }
 
         public string OrderNumber

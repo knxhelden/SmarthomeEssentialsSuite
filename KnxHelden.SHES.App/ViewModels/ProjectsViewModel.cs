@@ -164,7 +164,8 @@ namespace KnxHelden.SHES.App.ViewModels
 
         public async void OnProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!SelectedProject.HasErrors)
+            // This is intentional, as the validation has not yet been executed when the actual Observable property has been changed.
+            if (e.PropertyName == nameof(SelectedProject.HasErrors) && !SelectedProject.HasErrors)
             {
                 await _projectService.UpdateAsync(SelectedProject);
             }

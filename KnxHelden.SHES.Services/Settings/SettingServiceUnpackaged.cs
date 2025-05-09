@@ -38,7 +38,7 @@ namespace KnxHelden.SHES.Services.Settings
 
             if (_settings.TryGetValue(key, out obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await JsonHelper.ToObjectAsync<T>((string)obj);
             }
 
             return default;
@@ -48,7 +48,7 @@ namespace KnxHelden.SHES.Services.Settings
         {
             await InitializeAsync();
 
-            _settings[key] = await Json.StringifyAsync(value);
+            _settings[key] = await JsonHelper.StringifyAsync(value);
 
             var folderPath = Path.Combine(_localAppData, _options.ApplicationDataFolder);
             var fileName = _options.LocalSettingsFile;

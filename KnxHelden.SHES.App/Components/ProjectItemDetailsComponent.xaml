@@ -6,7 +6,7 @@
     xmlns:local="using:KnxHelden.SHES.App.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:KnxHelden.SHES.Controls.FormFieldService"
+    xmlns:factory="using:KnxHelden.SHES.Controls.ControlFactory"
     xmlns:validation="using:WinUIValidation"
     mc:Ignorable="d">
 
@@ -19,7 +19,7 @@
             </GridView.ItemsPanel>
 
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="controls:FormField">
+                <DataTemplate x:DataType="factory:FormField">
                     <Grid MinHeight="50" Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150" />
@@ -35,7 +35,7 @@
                                   Content="{x:Bind Control}" />
                         <validation:ValidationFor Grid.Column="1"
                                                   Grid.Row="1"
-                                                  PropertyName="{x:Bind PropertyName}" Margin="0,5,0,0" />
+                                                  PropertyName="{x:Bind PropertyPath}" Margin="0,5,0,0" />
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
