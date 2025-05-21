@@ -1,5 +1,6 @@
 ﻿using KnxHelden.SHES.Models.Attributes;
 using KnxHelden.SHES.Models.Entities;
+using KnxHelden.SHES.Models.Strings;
 using KnxHelden.SHES.Shared.Extensions;
 using System;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ namespace KnxHelden.SHES.Models.Observables
     {
         #region --- Properties ---
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
         public string Name
         {
             get => entity.Name;

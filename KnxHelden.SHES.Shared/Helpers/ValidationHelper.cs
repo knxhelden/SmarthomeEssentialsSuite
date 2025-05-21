@@ -44,19 +44,24 @@ namespace KnxHelden.SHES.Shared.Helpers
             Func<T, Task> updateFunc)
             where T : INotifyPropertyChanged
         {
-            bool isValidationProperty = ValidationHelper.HasValidationAttribute<T>(e.PropertyName);
-            bool isErrorProperty = e.PropertyName == nameof(INotifyDataErrorInfo.HasErrors) || e.PropertyName == "Errors";
-
-            if (!isValidationProperty && !isErrorProperty && !HasErrors(observable))
-            {
-                await updateFunc(observable);
-                return;
-            }
-
-            if (e.PropertyName == nameof(INotifyDataErrorInfo.HasErrors) && !HasErrors(observable))
+            if (e.PropertyName != nameof(INotifyDataErrorInfo.HasErrors) && e.PropertyName != "Errors")
             {
                 await updateFunc(observable);
             }
+
+            //bool isValidationProperty = ValidationHelper.HasValidationAttribute<T>(e.PropertyName);
+            //bool isErrorProperty = e.PropertyName == nameof(INotifyDataErrorInfo.HasErrors) || e.PropertyName == "Errors";
+
+            //if (!isValidationProperty && !isErrorProperty && !HasErrors(observable))
+            //{
+            //    await updateFunc(observable);
+            //    return;
+            //}
+
+            //if (e.PropertyName == nameof(INotifyDataErrorInfo.HasErrors) && !HasErrors(observable))
+            //{
+            //    await updateFunc(observable);
+            //}
         }
 
         /// <summary>

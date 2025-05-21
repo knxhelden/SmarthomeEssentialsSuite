@@ -41,7 +41,7 @@ namespace KnxHelden.SHES.Models.Observables
         public string ClientPhone
         {
             get => entity.ClientPhone;
-            set => SetProperty(entity.ClientPhone, value, entity, (u, n) => u.ClientPhone = n);
+            set => SetProperty(entity.ClientPhone, value, entity, (u, n) => u.ClientPhone = n, true);
         }
 
         public string ClientEmail

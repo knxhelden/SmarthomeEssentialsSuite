@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using KnxHelden.SHES.App.Messages;
 using KnxHelden.SHES.Controls.ControlFactory;
@@ -13,6 +14,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -33,21 +35,15 @@ namespace KnxHelden.SHES.App.ComponentModels
             {
                 if (_currentDevice != value)
                 {
-                    if (_currentDevice != null)
-                    {
-                        // Remove the old event handler to prevent memory leaks and duplicate event calls
-                        _currentDevice.PropertyChanged -= OnDevicePropertyChanged;
-                    }
                     _currentDevice = value;
                     this.GenerateFormFields();
-
-                    // Add the event handler to listen for changes in the new device
-                    _currentDevice.PropertyChanged += OnDevicePropertyChanged;
                 }
             }
         }
 
         public ObservableCollection<FormField> FormFields { get; } = new();
+
+        public IAsyncRelayCommand UpdateProjectItemCommand { get; }
 
         #endregion
 
@@ -68,22 +64,9 @@ namespace KnxHelden.SHES.App.ComponentModels
                     CurrentDevice = _deviceService.GetByIdAsync(m.Value.Id).Result;
                 }
             });
-        }
 
-        #endregion
-
-        #region --- Events ---
-
-        private async void OnDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            await ValidationHelper.HandlePropertyChangedAsync<ObservableDevice>(
-                sender,
-                e,
-                CurrentDevice,
-                async (device) =>
-                {
-                    await _deviceService.UpdateAsync(device);
-                });
+            // Commands
+            UpdateProjectItemCommand = new AsyncRelayCommand(async (dialog) => await UpdateProjectItem());
         }
 
         #endregion
@@ -143,6 +126,15 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             //FormFields.Add(new FormField(_resourceLoader.GetString("StructureView_ProjectItemDetails_DivisionUnits"),
             //    _formFieldService.GetNumberBox(CurrentDevice, nameof(CurrentDevice.DivisionUnits))));
+        }
+
+        #endregion
+
+        #region --- Commands ---
+
+        private async Task UpdateProjectItem()
+        {
+            await _deviceService.UpdateAsync(CurrentDevice);
         }
 
         #endregion

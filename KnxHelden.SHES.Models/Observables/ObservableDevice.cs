@@ -25,28 +25,28 @@ namespace KnxHelden.SHES.Models.Observables
         [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.Required))]
         public string Identifier
         {
-            get => ((Device)entity).Identifier;
-            set => SetProperty(((Device)entity).Identifier, value, (Device)entity, (u, n) => u.Identifier = n, true);
+            get => entity.Identifier;
+            set => SetProperty(entity.Identifier, value, entity, (u, n) => u.Identifier = n, true);
         }
 
         public string OrderNumber
         {
-            get => ((Device)entity).OrderNumber;
-            set => SetProperty(((Device)entity).OrderNumber, value, (Device)entity, (u, n) => u.OrderNumber = n);
+            get => entity.OrderNumber;
+            set => SetProperty(entity.OrderNumber, value, entity, (u, n) => u.OrderNumber = n);
         }
 
         public DeviceType Type
         {
-            get => ((Device)entity).Type;
-            set => SetProperty(((Device)entity).Type, value, (Device)entity, (u, n) => u.Type = n);
+            get => entity.Type;
+            set => SetProperty(entity.Type, value, entity, (u, n) => u.Type = n);
         }
 
         public BusType BusType
         {
-            get => ((Device)entity).BusType;
+            get => entity.BusType;
             set
             {
-                SetProperty(((Device)entity).BusType, value, (Device)entity, (u, n) => u.BusType = n);
+                SetProperty(entity.BusType, value, entity, (u, n) => u.BusType = n);
                 OnPropertyChanged(nameof(TypeIcon));
             }
         }
@@ -54,7 +54,7 @@ namespace KnxHelden.SHES.Models.Observables
         [KnxPhysicalAddress(ErrorMessage = "Ungültige KNX-Adresse.")]
         public string PhysicalAddress
         {
-            get => string.Format("{0}.{1}.{2}", ((Device)entity).KnxTopologyArea, ((Device)entity).KnxTopologyLine, ((Device)entity).KnxTopologyAddress);
+            get => string.Format("{0}.{1}.{2}", entity.KnxTopologyArea, entity.KnxTopologyLine, entity.KnxTopologyAddress);
             set
             {
                 // Must be explicitly validated here, since there is no 1-to-1 mapping with a property
@@ -68,7 +68,7 @@ namespace KnxHelden.SHES.Models.Observables
                         int.TryParse(parts[1], out int line) &&
                         int.TryParse(parts[2], out int address))
                     {
-                        var device = (Device)entity;
+                        var device = entity;
 
                         SetProperty(device.KnxTopologyArea, area, device, (d, v) => d.KnxTopologyArea = v);
                         SetProperty(device.KnxTopologyLine, line, device, (d, v) => d.KnxTopologyLine = v);
@@ -80,16 +80,16 @@ namespace KnxHelden.SHES.Models.Observables
 
         public bool IsRailMounted
         {
-            get => ((Device)entity).IsRailMounted;
-            set => SetProperty(((Device)entity).IsRailMounted, value, (Device)entity, (u, n) => u.IsRailMounted = n);
+            get => entity.IsRailMounted;
+            set => SetProperty(entity.IsRailMounted, value, entity, (u, n) => u.IsRailMounted = n);
         }
 
         public float DivisionUnits
         {
-            get => ((Device)entity).DivisionUnits;
+            get => entity.DivisionUnits;
             set
             {
-                SetProperty(((Device)entity).DivisionUnits, value, (Device)entity, (u, n) => u.DivisionUnits = n);
+                SetProperty(entity.DivisionUnits, value, entity, (u, n) => u.DivisionUnits = n);
                 OnPropertyChanged(nameof(TypeIcon));
             }
         }
@@ -111,12 +111,12 @@ namespace KnxHelden.SHES.Models.Observables
 
         public ObservableManufacturer Manufacturer
         {
-            get => ((Device)entity).Manufacturer != null ? new ObservableManufacturer(((Device)entity).Manufacturer) : null;
+            get => entity.Manufacturer != null ? new ObservableManufacturer(entity.Manufacturer) : null;
             set
             {
                 if (value != null)
                 {
-                    SetProperty(((Device)entity).Manufacturer, value.entity, (Device)entity, (d, v) => d.Manufacturer = v);
+                    SetProperty(entity.Manufacturer, value.entity, entity, (d, v) => d.Manufacturer = v);
                 }
             }
         }
