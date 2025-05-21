@@ -76,11 +76,14 @@ namespace KnxHelden.SHES.App.ComponentModels
 
         private async void OnDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // This is intentional, as the validation has not yet been executed when the actual Observable property has been changed.
-            if (e.PropertyName == nameof(CurrentDevice.HasErrors) && !CurrentDevice.HasErrors)
-            {
-                await this._deviceService.UpdateAsync(CurrentDevice);
-            }
+            await ValidationHelper.HandlePropertyChangedAsync<ObservableDevice>(
+                sender,
+                e,
+                CurrentDevice,
+                async (device) =>
+                {
+                    await _deviceService.UpdateAsync(device);
+                });
         }
 
         #endregion

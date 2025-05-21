@@ -7,6 +7,7 @@ using KnxHelden.SHES.Models.Observables;
 using KnxHelden.SHES.Services.Knx;
 using KnxHelden.SHES.Services.Projects;
 using KnxHelden.SHES.Shared.Extensions;
+using KnxHelden.SHES.Shared.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
@@ -164,11 +165,14 @@ namespace KnxHelden.SHES.App.ViewModels
 
         public async void OnProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // This is intentional, as the validation has not yet been executed when the actual Observable property has been changed.
-            if (e.PropertyName == nameof(SelectedProject.HasErrors) && !SelectedProject.HasErrors)
-            {
-                await _projectService.UpdateAsync(SelectedProject);
-            }
+            await ValidationHelper.HandlePropertyChangedAsync<ObservableProject>(
+                sender,
+                e,
+                SelectedProject,
+                async (project) =>
+                {
+                    await _projectService.UpdateAsync(project);
+                });
         }
 
         #endregion
