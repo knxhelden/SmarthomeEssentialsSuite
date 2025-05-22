@@ -17,7 +17,7 @@ namespace KnxHelden.SHES.Models.Observables
         public string Name
         {
             get => entity.Name;
-            set => SetProperty(entity.Name, value, entity, (u, n) => u.Name = n);
+            set => SetProperty(entity.Name, value, entity, (u, n) => u.Name = n, true);
         }
 
         private readonly string _icon;

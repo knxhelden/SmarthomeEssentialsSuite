@@ -79,6 +79,16 @@ namespace KnxHelden.SHES.App.ComponentModels
 
             FormFields.Clear();
 
+            var configName = new FormFieldConfig
+            {
+                Label = _resourceLoader.GetString("StructureView_ProjectItemDetails_Name"),
+                PropertyName = "ProjectItem.Name",
+                PropertyPath = PropertyPathHelper.GetPropertyPath(() => CurrentDevice.ProjectItem.Name),
+                FieldType = FormFieldType.TextBox
+            };
+
+            FormFields.Add(new FormField(configName, CurrentDevice));
+
             var configIdentifier = new FormFieldConfig
             {
                 Label = _resourceLoader.GetString("StructureView_ProjectItemDetails_Identifier"),

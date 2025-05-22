@@ -35,8 +35,8 @@
                           VerticalAlignment="Center"
                           Content="{x:Bind Control}" />
                             <validation:ValidationFor Grid.Column="1"
-                                          Grid.Row="1"
-                                          PropertyName="{x:Bind PropertyPath}" Margin="0,5,0,0" />
+                                                      Grid.Row="1"
+                                                      PropertyName="{x:Bind PropertyPath}" Margin="0,5,0,0" />
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>
