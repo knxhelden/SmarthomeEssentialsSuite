@@ -15,6 +15,7 @@ using Microsoft.Windows.ApplicationModel.Resources;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace KnxHelden.SHES.App.ComponentModels
 {
@@ -35,7 +36,7 @@ namespace KnxHelden.SHES.App.ComponentModels
             {
                 if (_currentDevice != value)
                 {
-                    _currentDevice = value;
+                    SetProperty(ref _currentDevice, value);
                     this.GenerateFormFields();
                 }
             }
