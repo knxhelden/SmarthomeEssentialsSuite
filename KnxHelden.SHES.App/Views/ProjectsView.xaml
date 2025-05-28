@@ -37,35 +37,26 @@
                         <TextBlock x:Uid="ProjectView_NewButton" />
                     </StackPanel>
                     <SplitButton.Flyout>
-                        <Flyout Placement="Bottom">
-                            <StackPanel>
-                                <MenuFlyoutItem x:Uid="ProjectView_NewButton_EtsImport"
-                                                Command="{x:Bind ViewModel.ImportKnxProjectDialogCommand}"
-                                                CommandParameter="{x:Bind ImportKnxProjectDialog}" />
-                                <MenuFlyoutItem x:Uid="ProjectView_NewButton_OpenhabImport" />
-                            </StackPanel>
-                        </Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem x:Uid="ProjectView_NewButton_EtsImport"
+                                            Command="{x:Bind ViewModel.ImportKnxProjectDialogCommand}"
+                                            CommandParameter="{x:Bind ImportKnxProjectDialog}" />
+                            <MenuFlyoutItem x:Uid="ProjectView_NewButton_OpenhabImport" />
+                        </MenuFlyout>
                     </SplitButton.Flyout>
                 </SplitButton>
-                <Button x:Uid="ProjectView_OpenButton"
-                        Command="{x:Bind ViewModel.OpenProjectCommand}"
-                        Margin="0,0,8,0" />
-                <Button IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
-                        Margin="0,0,8,0">
+                <SplitButton IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}" Command="{x:Bind ViewModel.OpenProjectCommand}" Margin="0,0,8,0">
                     <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74D;" Margin="0 0 5 0" FontSize="13" />
-                        <TextBlock x:Uid="ProjectView_DeleteButton" />
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E5;" Margin="0 0 5 0" FontSize="13" />
+                        <TextBlock Text="Öffnen" />
                     </StackPanel>
-                    <Button.Flyout>
-                        <Flyout>
-                            <StackPanel>
-                                <TextBlock x:Uid="ProjectView_DeleteButton_ConfirmMessage" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,12" />
-                                <Button x:Uid="ProjectView_DeleteButton_ConfirmButton"
-                                        Command="{x:Bind ViewModel.DeleteProjectCommand}" />
-                            </StackPanel>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
+                    <SplitButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Icon="Edit" Text="Bearbeiten" Command="{x:Bind ViewModel.EnableProjectEditingCommand}" />
+                            <MenuFlyoutItem Icon="Delete" Text="Löschen" Command="{x:Bind ViewModel.DeleteProjectCommand}" />
+                        </MenuFlyout>
+                    </SplitButton.Flyout>
+                </SplitButton>
             </StackPanel>
             <ListView x:Name="ProjectList"
                       ItemsSource="{x:Bind ViewModel.ProjectList}"
@@ -119,19 +110,17 @@
                       Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
                       CornerRadius="0,10,10,0"
                       Padding="16">
-            <validation:Form Model="{x:Bind ViewModel}">
+            <validation:Form Model="{x:Bind ViewModel}" IsEnabled="{x:Bind ViewModel.IsProjectEditable, Mode=OneWay}" OnValidSubmit="{x:Bind ViewModel.UpdateProjectCommand}">
             <StackPanel>
 
                     <TextBlock x:Uid="ProjectView_Project_Details"
                                Style="{StaticResource SubtitleTextBlockStyle}"
                                Margin="0,0,0,24" />
                     <TextBox x:Uid="ProjectView_Project_Name"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Name, Mode=TwoWay}"
                              MaxLength="50" />
                     <validation:ValidationFor PropertyName="SelectedProject.Name" Margin="0,5,0,0" />
                     <TextBox x:Uid="ProjectView_Project_Number"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.Number, Mode=TwoWay}"
                              MaxLength="12"
                              Margin="0,16,0,0" />
@@ -146,26 +135,22 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Uid="ProjectView_Project_FirstName"
-                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                                  Text="{x:Bind ViewModel.SelectedProject.ClientFirstName, Mode=TwoWay}"
                                  MaxLength="50"
                                  Margin="0,0,24,0" />
                         <validation:ValidationFor PropertyName="SelectedProject.ClientFirstName" Margin="0,5,0,0" />
                         <TextBox x:Uid="ProjectView_Project_LastName"
                                  Grid.Column="1"
-                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                                  Text="{x:Bind ViewModel.SelectedProject.ClientSurname, Mode=TwoWay}"
                                  MaxLength="50" />
                         <validation:ValidationFor PropertyName="SelectedProject.ClientSurname" Margin="0,5,0,0" />
                     </Grid>
 
                     <TextBox x:Uid="ProjectView_Project_Phone"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.ClientPhone, Mode=TwoWay}"
                              MaxLength="15" />
                     <validation:ValidationFor PropertyName="SelectedProject.ClientPhone" Margin="0,5,0,0" />
                     <TextBox x:Uid="ProjectView_Project_Email"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.ClientEmail, Mode=TwoWay}"
                              Margin="0,16,0,0" />
                     <validation:ValidationFor PropertyName="SelectedProject.ClientEmail" Margin="0,5,0,0" />
@@ -174,7 +159,6 @@
                                Style="{StaticResource SubtitleTextBlockStyle}"
                                Margin="0,24,0,24" />
                     <TextBox x:Uid="ProjectView_Project_Street"
-                             IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                              Text="{x:Bind ViewModel.SelectedProject.ConstructionStreet, Mode=TwoWay}"
                              MaxLength="50" />
                     <validation:ValidationFor PropertyName="SelectedProject.ConstructionStreet" Margin="0,5,0,0" />
@@ -184,19 +168,19 @@
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Uid="ProjectView_Project_Zip"
-                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                                  Text="{x:Bind ViewModel.SelectedProject.ConstructionPostalCode, Mode=TwoWay}"
                                  MaxLength="8"
                                  Margin="0,0,24,0" />
                         <validation:ValidationFor PropertyName="SelectedProject.ConstructionPostalCode" Margin="0,5,0,0" />
                         <TextBox x:Uid="ProjectView_Project_City"
                                  Grid.Column="1"
-                                 IsEnabled="{x:Bind ViewModel.IsProjectSelected, Mode=OneWay}"
                                  Text="{x:Bind ViewModel.SelectedProject.ConstructionCity, Mode=TwoWay}"
                                  MaxLength="50" />
                         <validation:ValidationFor PropertyName="SelectedProject.ConstructionCity" Margin="0,5,0,0" />
                     </Grid>
-            </StackPanel>
+
+                    <validation:SubmitButton Content="Submit" HorizontalAlignment="Stretch" Margin="0,20,0,10"/>
+                </StackPanel>
             </validation:Form>
         </ScrollViewer>
 

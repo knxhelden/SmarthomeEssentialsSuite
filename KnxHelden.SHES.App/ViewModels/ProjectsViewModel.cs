@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -46,35 +47,29 @@ namespace KnxHelden.SHES.App.ViewModels
             get => _selectedProject;
             set
             {
-                if (_selectedProject != value)
-                {
-                    if (_selectedProject != null)
-                    {
-                        // Remove the old event handler to prevent memory leaks and duplicate event calls
-                        _selectedProject.PropertyChanged -= OnProjectPropertyChanged;
-                    }
-
-                    SetProperty(ref _selectedProject, value);
-                    OnPropertyChanged(nameof(IsProjectSelected));
-                    OpenProjectCommand.NotifyCanExecuteChanged();
-                    DeleteProjectCommand.NotifyCanExecuteChanged();
-
-                    // Add the event handler to listen for changes in the new device
-                    _selectedProject.PropertyChanged += OnProjectPropertyChanged;
-                }
-
-
-                
+                SetProperty(ref _selectedProject, value);
+                OnPropertyChanged(nameof(IsProjectSelected));
+                OpenProjectCommand.NotifyCanExecuteChanged();
+                DeleteProjectCommand.NotifyCanExecuteChanged();
             }
         }
 
         public bool IsProjectSelected => _selectedProject != null;
 
+        private bool _isProjectEditable;
+        public bool IsProjectEditable
+        {
+            get => _isProjectEditable;
+            set => SetProperty(ref _isProjectEditable, value);
+        }
+
         public IAsyncRelayCommand OpenAddProjectDialogCommand { get; }
         public IAsyncRelayCommand AddProjectCommand { get; }
         public IRelayCommand OpenProjectCommand { get; }
         public IAsyncRelayCommand DeleteProjectCommand { get; }
-        
+        public IRelayCommand EnableProjectEditingCommand { get; }
+        public IAsyncRelayCommand UpdateProjectCommand { get; }
+
 
         #endregion
 
@@ -149,6 +144,8 @@ namespace KnxHelden.SHES.App.ViewModels
             OpenAddProjectDialogCommand = new AsyncRelayCommand<ContentDialog>(async (dialog) => await OpenAddProjectDialog(dialog));
             AddProjectCommand = new AsyncRelayCommand<ContentDialog>(async (dialog) => await AddProject(dialog));
             OpenProjectCommand = new RelayCommand(OpenProject, CanOpenProject);
+            EnableProjectEditingCommand = new RelayCommand(EnableProjectEditing, CanEnableProjectEditing);
+            UpdateProjectCommand = new AsyncRelayCommand(UpdateProject);
             DeleteProjectCommand = new AsyncRelayCommand(async (dialog) => await DeleteProject(), CanDeleteProject);
             ImportKnxProjectDialogCommand = new AsyncRelayCommand<ContentDialog>(async (dialog) => await this.ImportKnxProjectDialog(dialog));
             ImportKnxProjectCommand = new AsyncRelayCommand(ImportKnxProject);
@@ -163,21 +160,15 @@ namespace KnxHelden.SHES.App.ViewModels
             ProjectList.AddRange(await _projectService.GetAllAsync());
         }
 
-        public async void OnProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            await ValidationHelper.HandlePropertyChangedAsync<ObservableProject>(
-                sender,
-                e,
-                SelectedProject,
-                async (project) =>
-                {
-                    await _projectService.UpdateAsync(project);
-                });
-        }
-
         #endregion
 
         #region --- Commands ---
+
+        public async Task UpdateProject()
+        {
+            await _projectService.UpdateAsync(SelectedProject);
+            IsProjectEditable = false;
+        }
 
         private async Task OpenAddProjectDialog(ContentDialog dialog)
         {
@@ -209,6 +200,16 @@ namespace KnxHelden.SHES.App.ViewModels
         {
             // Set current project
             WeakReferenceMessenger.Default.Send(new CurrentProjectSenderMessage(this.SelectedProject));
+        }
+
+        private bool CanEnableProjectEditing()
+        {
+            return IsProjectSelected;
+        }
+
+        private void EnableProjectEditing()
+        {
+            IsProjectEditable = true;
         }
 
         private bool CanDeleteProject()

@@ -67,7 +67,7 @@ namespace KnxHelden.SHES.App.ComponentModels
             });
 
             // Commands
-            UpdateProjectItemCommand = new AsyncRelayCommand(async (dialog) => await UpdateProjectItem());
+            UpdateProjectItemCommand = new AsyncRelayCommand(UpdateProjectItem);
         }
 
         #endregion
