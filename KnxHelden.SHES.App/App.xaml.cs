@@ -112,9 +112,6 @@ namespace KnxHelden.SHES.App
             services.AddTransient<ProjectItemDevicesComponentModel>();
             services.AddTransient<ProjectItemCabinetComponentModel>();
             services.AddTransient<ProjectItemDetailsComponentModel>();
-            services.AddTransient<ProjectItemMetadataComponentModel>();
-            services.AddTransient<ProjectItemMetadataComponentModel>();
-            services.AddTransient<ProjectItemMetadataComponentModel>();
 
 
             services.AddSingleton<ResourceLoader>();

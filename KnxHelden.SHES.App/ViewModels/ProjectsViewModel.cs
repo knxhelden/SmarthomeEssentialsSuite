@@ -219,6 +219,9 @@ namespace KnxHelden.SHES.App.ViewModels
 
         private async Task DeleteProject()
         {
+            SelectedProject = null;
+            IsProjectEditable = false;
+
             await _projectService.DeleteAsync(SelectedProject);
             ProjectList.Remove(SelectedProject);
             WeakReferenceMessenger.Default.Send(new CurrentProjectSenderMessage(null));

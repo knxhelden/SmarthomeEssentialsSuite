@@ -18,7 +18,6 @@
     <None Remove="Components\ProjectItemCabinetComponent.xaml" />
     <None Remove="Components\ProjectItemDetailsComponent.xaml" />
     <None Remove="Components\ProjectItemDevicesComponent.xaml" />
-    <None Remove="Components\ProjectItemMetadataComponent.xaml" />
     <None Remove="Resources\ControlDataTemplates.xaml" />
     <None Remove="Views\CompanyView.xaml" />
     <None Remove="Views\ManufacturerView.xaml" />
@@ -95,11 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Components\ProjectItemCabinetComponent.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Components\ProjectItemMetadataComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

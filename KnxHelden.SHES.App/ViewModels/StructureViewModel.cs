@@ -39,36 +39,14 @@ namespace KnxHelden.SHES.App.ViewModels
         public Visibility LocationTabVisibility
         {
             get => _locationTabVisibility;
-            private set
-            {
-                SetProperty(ref _locationTabVisibility, value);
-                OnPropertyChanged(nameof(LocationTabSelected));
-            }
+            private set => SetProperty(ref _locationTabVisibility, value);
         }
 
         private Visibility _cabinetTabVisibility = Visibility.Collapsed;
         public Visibility CabinetTabVisibility
         {
             get => _cabinetTabVisibility;
-            private set
-            {
-                SetProperty(ref _cabinetTabVisibility, value);
-            }
-        }
-
-        private Visibility _detailsTabVisibility = Visibility.Collapsed;
-        public Visibility DetailsTabVisibility
-        {
-            get => _detailsTabVisibility;
-            private set
-            {
-                SetProperty(ref _detailsTabVisibility, value);
-            }
-        }
-
-        public bool LocationTabSelected
-        {
-            get => _locationTabVisibility == Visibility.Visible;
+            private set => SetProperty(ref _cabinetTabVisibility, value);
         }
 
         #endregion
@@ -89,15 +67,9 @@ namespace KnxHelden.SHES.App.ViewModels
         {
             this.LocationTabVisibility = Visibility.Collapsed;
             this.CabinetTabVisibility = Visibility.Collapsed;
-            this.DetailsTabVisibility = Visibility.Collapsed;
 
-            // Device Tab
-            if (typeof(Device).IsAssignableFrom(locationType))
-            {
-                this.DetailsTabVisibility = Visibility.Visible;
-            }
             // Cabinet Tab
-            else if (typeof(Cabinet).IsAssignableFrom(locationType))
+            if (typeof(Cabinet).IsAssignableFrom(locationType))
             {
                 this.LocationTabVisibility = Visibility.Visible;
                 this.CabinetTabVisibility = Visibility.Visible;

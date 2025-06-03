@@ -20,8 +20,6 @@
             <ColumnDefinition MinWidth="200" Width="200" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition MinWidth="300" Width="*" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition MinWidth="200" Width="200" />
         </Grid.ColumnDefinitions>
 
         <!-- PROJECT TREE -->
@@ -41,11 +39,20 @@
               Margin="16,0,16,0">
             <TabView IsAddTabButtonVisible="False"
                      TabWidthMode="SizeToContent">
+                <!-- PROJECT ITEM DETAILS TAB -->
+                <TabViewItem x:Uid="StructureView_DetailsTab"
+                             IsClosable="False"
+                             IsSelected="True">
+                    <TabViewItem.IconSource>
+                        <FontIconSource FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF12E4;" />
+                    </TabViewItem.IconSource>
+
+                    <components:ProjectItemDetailsComponent x:Name="ProjectItemDetailsComponent" />
+                </TabViewItem>
                 <!-- DEVICES TAB -->
                 <TabViewItem x:Uid="StructureView_DevicesTab"
                  IsClosable="False"
-                 Visibility="{x:Bind ViewModel.LocationTabVisibility, Mode=OneWay}"
-                 IsSelected="{x:Bind ViewModel.LocationTabSelected, Mode=OneWay}">
+                 Visibility="{x:Bind ViewModel.LocationTabVisibility, Mode=OneWay}">
                     <TabViewItem.IconSource>
                         <FontIconSource FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF12E4;" />
                     </TabViewItem.IconSource>
@@ -62,30 +69,7 @@
 
                     <components:ProjectItemCabinetComponent x:Name="ProjectItemCabinetComponent" />
                 </TabViewItem>
-                <!-- DEVICE TAB -->
-                <TabViewItem x:Uid="StructureView_DetailsTab"
-                 IsClosable="False"
-                 Visibility="{x:Bind ViewModel.DetailsTabVisibility, Mode=OneWay}"
-                 IsSelected="{x:Bind ViewModel.LocationTabSelected, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}">
-                    <TabViewItem.IconSource>
-                        <FontIconSource FontFamily="{StaticResource MaterialDesignIcons}" Glyph="&#xF12E4;" />
-                    </TabViewItem.IconSource>
-
-                    <components:ProjectItemDetailsComponent x:Name="ProjectItemDetailsComponent" />
-                </TabViewItem>
             </TabView>
-        </Grid>
-
-        <controls:GridSplitter Grid.Column="3"
-                               Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" />
-
-        <!-- PROJECT ITEM METADATA -->
-        <Grid Grid.Column="4"
-              VerticalAlignment="Stretch"
-              Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-              CornerRadius="0,10,10,0"
-              Padding="16">
-            <components:ProjectItemMetadataComponent x:Name="ProjectItemMetadataComponent" />
         </Grid>
     </Grid>
 </Page>
