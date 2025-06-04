@@ -13,6 +13,12 @@ namespace KnxHelden.SHES.Models.Observables
             get => _projectItem;
         }
 
+        public string OrderNumber
+        {
+            get => entity.OrderNumber;
+            set => SetProperty(entity.OrderNumber, value, entity, (u, n) => u.OrderNumber = n);
+        }
+
         #endregion
 
         #region --- Constructors ---
